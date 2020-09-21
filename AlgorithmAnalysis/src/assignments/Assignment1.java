@@ -27,18 +27,17 @@ public class Assignment1 {
 		return aList;
 	}
 	
-	static private Hashtable<String, Integer> createHT(int n)
+	static private Hashtable<String, Integer> createHT(String[] aList)
 	{
 		Hashtable<String, Integer> hashTable = new Hashtable<String, Integer>();
-		
-		String[] aList = createRandomStringArray(n);
+
 		long startTime = System.currentTimeMillis( );
-		for (int i=0; i<n; i++)
+		for (int i=0; i<aList.length; i++)
 		{
 			hashTable.put(aList[i], i);
 		}		
 		long totalTime = System.currentTimeMillis( ) - startTime;
-		System.out.println("insertion of " + n + " took " + totalTime + " ms");
+		System.out.println("insertion of " + aList.length + " took " + totalTime + " ms");
 		return hashTable;
 	}
 
@@ -63,16 +62,17 @@ public class Assignment1 {
 	
 	public static void main(String[] args)
 	{
-		for (int i=1; i<9; i++)
+		for (int i=1; i<=20; i++)
 		{
 			System.out.println(i);
-			int n = (int) Math.pow(10, i);
-			Hashtable<String, Integer> hashTable = createHT(n);
+			int n = (int) Math.pow(2, i);
 			
 			String[] stringArray = createRandomStringArray(n);
-			deleteFromHT(hashTable, stringArray);
+			Hashtable<String, Integer> hashTable = createHT(stringArray);
+			
+			String[] stringArrayForDeletion = createRandomStringArray(n);
+			deleteFromHT(hashTable, stringArrayForDeletion);
 		}
-		
 	}
 
 }
