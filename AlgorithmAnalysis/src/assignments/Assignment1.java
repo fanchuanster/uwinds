@@ -75,7 +75,6 @@ public class Assignment1 {
 		
 		startTime = System.currentTimeMillis();
 		int[] ints = aR.ints(to, 1, to+1).toArray();
-		/*System.out.println(Arrays.toString(ints));*/
 		for (int i : ints)
 		{
 			int res = bst.get(i);
