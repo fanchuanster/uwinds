@@ -27,23 +27,30 @@ public class Assignment1 {
 		return aList;
 	}
 	
-	static private Hashtable<String, Integer> createHT(String[] aList)
+	static private Hashtable<String, Integer> createHT(int n)
 	{
+		String[] aList = createRandomStringArray(n);
+		
 		Hashtable<String, Integer> hashTable = new Hashtable<String, Integer>();
 
-		long startTime = System.currentTimeMillis( );
-		for (int i=0; i<aList.length; i++)
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
 		{
 			hashTable.put(aList[i], i);
 		}		
-		long totalTime = System.currentTimeMillis( ) - startTime;
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%dns\t", totalTime/n);
 
 		return hashTable;
 	}
 
 	static private void deleteFromHT(Hashtable<String, Integer> hashTable, String[] toDeletes)
 	{
-		for (int i=0; i<toDeletes.length; i++)
+		int n = toDeletes.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
 		{
 			String key = toDeletes[i];
 			Integer v = hashTable.get(key);
@@ -52,6 +59,9 @@ public class Assignment1 {
 				hashTable.remove(key);
 			}
 		}
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%dns%n", totalTime/n);
 	}
 	
 	/*
@@ -84,20 +94,13 @@ public class Assignment1 {
 		{
 			int n = (int) Math.pow(2, i);
 			
-			String[] stringArray = createRandomStringArray(n);
+			System.out.format("%d\t", i);
 			
-			long startTime = System.currentTimeMillis();
-			Hashtable<String, Integer> hashTable = createHT(stringArray);
-			long totalTime = System.currentTimeMillis( ) - startTime;
+			Hashtable<String, Integer> hashTable = createHT(n);
 			
 			String[] stringArrayForDeletion = createRandomStringArray(n);
 			
-			startTime = System.currentTimeMillis();
 			deleteFromHT(hashTable, stringArrayForDeletion);
-			long totalTimeDeletion = System.currentTimeMillis( ) - startTime;
-			
-			System.out.format("%d\t%d\t%d%n", i, totalTime, totalTimeDeletion);
-			System.out.println(hashTable.size());
 		}
 	}
 	
