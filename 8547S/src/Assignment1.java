@@ -56,8 +56,7 @@ public class Assignment1 {
 	
 	/*
 	 * static private void testTrees() { }
-	 */
-	/*
+
 	 * static private void testBSTree() { System.out.println("testBSTree start...");
 	 * BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
 	 * 

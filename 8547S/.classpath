@@ -6,7 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="dependency/Linear Data Structures/hashTable"/>
-	<classpathentry kind="lib" path="dependency/Linear Data Structures/heaps"/>
+	<classpathentry kind="lib" path="dependency"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
