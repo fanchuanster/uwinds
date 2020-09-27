@@ -1,6 +1,14 @@
-import java.util.*;
+import java.util.Hashtable;
+import java.util.Random;
 
-import java.util.stream.IntStream; 
+import hashTable.CuckooHashTable;
+import hashTable.HashFamily;
+import hashTable.StringHashFamily;
+import hashTable.CuckooHashTable;
+
+//import hashTable.CuckooHashTable;
+//import hashTable.StringHashFamily;
+
 
 public class Assignment1 {
 	static private Random aR = new Random();
@@ -27,16 +35,19 @@ public class Assignment1 {
 		return aList;
 	}
 	
-	static private Hashtable<String, Integer> createHT(int n)
+//	static private Hashtable<String, Integer> createHT(int n)
+	static private CuckooHashTable<String> createHT(int n)
 	{
 		String[] aList = createRandomStringArray(n);
 		
-		Hashtable<String, Integer> hashTable = new Hashtable<String, Integer>();
+//		Hashtable<String, Integer> hashTable = new Hashtable<String, Integer>();
+		CuckooHashTable hashTable = new CuckooHashTable(new StringHashFamily(100), 10000);
 
 		long startTime = System.nanoTime();
 		for (int i=0; i<n; i++)
 		{
-			hashTable.put(aList[i], i);
+//			hashTable.put(aList[i], i);
+			hashTable.insert(aList[i]);
 		}		
 		long totalTime = System.nanoTime() - startTime;
 		
@@ -45,7 +56,8 @@ public class Assignment1 {
 		return hashTable;
 	}
 
-	static private void deleteFromHT(Hashtable<String, Integer> hashTable, String[] toDeletes)
+//	static private void deleteFromHT(Hashtable<String, Integer> hashTable, String[] toDeletes)
+	static private void deleteFromHT(CuckooHashTable<String> hashTable, String[] toDeletes)
 	{
 		int n = toDeletes.length;
 		
@@ -53,8 +65,8 @@ public class Assignment1 {
 		for (int i=0; i<n; i++)
 		{
 			String key = toDeletes[i];
-			Integer v = hashTable.get(key);
-			if (v != null)
+//			Integer v = hashTable.get(key);
+//			if (v != null)
 			{
 				hashTable.remove(key);
 			}
@@ -96,7 +108,7 @@ public class Assignment1 {
 			
 			System.out.format("%d\t", i);
 			
-			Hashtable<String, Integer> hashTable = createHT(n);
+			CuckooHashTable<String> hashTable = createHT(n);
 			
 			String[] stringArrayForDeletion = createRandomStringArray(n);
 			
