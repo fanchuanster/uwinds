@@ -44,7 +44,7 @@ public class Assignment1 {
 		}		
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns\t", totalTime/n);
+		System.out.format("%d\t", totalTime/n);
 	}
 
 	static private void deleteFromHT(CuckooHashTable<String> hashTable, String[] strList)
@@ -58,7 +58,7 @@ public class Assignment1 {
 		}
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns\t", totalTime/n);
+		System.out.format("%d\t", totalTime/n);
 	}
 	
 	
@@ -74,7 +74,7 @@ public class Assignment1 {
 		}		
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns\t", totalTime/n);
+		System.out.format("%d\t", totalTime/n);
 	}
 
 	static private void deleteFromHT(QuadraticProbingHashTable<String> hashTable, String[] strList)
@@ -88,7 +88,7 @@ public class Assignment1 {
 		}
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns\t", totalTime/n);
+		System.out.format("%d\t", totalTime/n);
 	}
 	
 	
@@ -104,7 +104,7 @@ public class Assignment1 {
 		}		
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns\t", totalTime/n);
+		System.out.format("%d\t", totalTime/n);
 	}
 
 	static private void deleteFromHT(SeparateChainingHashTable<String> hashTable, String[] strList)
@@ -118,7 +118,7 @@ public class Assignment1 {
 		}
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns\t", totalTime/n);
+		System.out.format("%d\t", totalTime/n);
 	}
 	
 	/*
@@ -147,6 +147,7 @@ public class Assignment1 {
 	 */
 	private static void testHashtable()
 	{
+		System.out.println("i\tCuck I\tCuck D\tQuad I\tQuad D\tSpCh I\tSpCh D");
 		for (int i=1; i<=20; i++)
 		{
 			int n = (int) Math.pow(2, i);
@@ -169,6 +170,8 @@ public class Assignment1 {
 			deleteFromHT(separateChainingHashTable, stringArrayForDeletion);
 			System.out.println();
 		}
+		System.out.println();
+		System.out.println("Insertion(I) and Deletion(D) average time in nano second");
 	}
 	
 	public static void main(String[] args)
