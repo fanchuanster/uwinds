@@ -1,13 +1,10 @@
 import java.util.Hashtable;
 import java.util.Random;
 
-import hashTable.CuckooHashTable;
-import hashTable.HashFamily;
-import hashTable.StringHashFamily;
-import hashTable.CuckooHashTable;
-
 //import hashTable.CuckooHashTable;
-//import hashTable.StringHashFamily;
+import hashTable.*;
+
+
 
 
 public class Assignment1 {
@@ -27,53 +24,101 @@ public class Assignment1 {
 	
 	static private String[] createRandomStringArray(int n)
 	{
-		String[] aList = new String[n];
+		String[] strList = new String[n];
 		for (int i=0; i<n; i++)
 		{
-			aList[i] = createRandomString(10);
+			strList[i] = createRandomString(10);
 		}
-		return aList;
+		return strList;
 	}
 	
-//	static private Hashtable<String, Integer> createHT(int n)
-	static private CuckooHashTable<String> createHT(int n)
+//	CuckooHashTable
+	static private void insertHT(CuckooHashTable<String> hashTable, String[] strList)
 	{
-		String[] aList = createRandomStringArray(n);
+		int n = strList.length;
 		
-//		Hashtable<String, Integer> hashTable = new Hashtable<String, Integer>();
-		CuckooHashTable hashTable = new CuckooHashTable(new StringHashFamily(100), 10000);
-
 		long startTime = System.nanoTime();
 		for (int i=0; i<n; i++)
 		{
-//			hashTable.put(aList[i], i);
-			hashTable.insert(aList[i]);
+			hashTable.insert(strList[i]);
 		}		
 		long totalTime = System.nanoTime() - startTime;
 		
 		System.out.format("%dns\t", totalTime/n);
-
-		return hashTable;
 	}
 
-//	static private void deleteFromHT(Hashtable<String, Integer> hashTable, String[] toDeletes)
-	static private void deleteFromHT(CuckooHashTable<String> hashTable, String[] toDeletes)
+	static private void deleteFromHT(CuckooHashTable<String> hashTable, String[] strList)
 	{
-		int n = toDeletes.length;
+		int n = strList.length;
 		
 		long startTime = System.nanoTime();
 		for (int i=0; i<n; i++)
 		{
-			String key = toDeletes[i];
-//			Integer v = hashTable.get(key);
-//			if (v != null)
-			{
-				hashTable.remove(key);
-			}
+			hashTable.remove(strList[i]);
 		}
 		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%dns%n", totalTime/n);
+		System.out.format("%dns\t", totalTime/n);
+	}
+	
+	
+	//	QuadraticProbingHashTable
+	static private void insertHT(QuadraticProbingHashTable<String> hashTable, String[] strList)
+	{
+		int n = strList.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			hashTable.insert(strList[i]);
+		}		
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%dns\t", totalTime/n);
+	}
+
+	static private void deleteFromHT(QuadraticProbingHashTable<String> hashTable, String[] strList)
+	{
+		int n = strList.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			hashTable.remove(strList[i]);
+		}
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%dns\t", totalTime/n);
+	}
+	
+	
+	//	SeparateChainingHashTable
+	static private void insertHT(SeparateChainingHashTable<String> hashTable, String[] strList)
+	{
+		int n = strList.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			hashTable.insert(strList[i]);
+		}		
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%dns\t", totalTime/n);
+	}
+
+	static private void deleteFromHT(SeparateChainingHashTable<String> hashTable, String[] strList)
+	{
+		int n = strList.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			hashTable.remove(strList[i]);
+		}
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%dns\t", totalTime/n);
 	}
 	
 	/*
@@ -108,11 +153,21 @@ public class Assignment1 {
 			
 			System.out.format("%d\t", i);
 			
-			CuckooHashTable<String> hashTable = createHT(n);
-			
+			String[] strList = createRandomStringArray(n);
 			String[] stringArrayForDeletion = createRandomStringArray(n);
 			
-			deleteFromHT(hashTable, stringArrayForDeletion);
+			CuckooHashTable<String> cuckooHashTable = new CuckooHashTable<String>(new StringHashFamily(100), 10000);
+			insertHT(cuckooHashTable, strList);
+			deleteFromHT(cuckooHashTable, stringArrayForDeletion);
+			
+			QuadraticProbingHashTable<String> quadraticProbingHashTable = new QuadraticProbingHashTable<String>();
+			insertHT(quadraticProbingHashTable, strList);
+			deleteFromHT(quadraticProbingHashTable, stringArrayForDeletion);
+			
+			SeparateChainingHashTable<String> separateChainingHashTable = new SeparateChainingHashTable<String>();
+			insertHT(separateChainingHashTable, strList);
+			deleteFromHT(separateChainingHashTable, stringArrayForDeletion);
+			System.out.println();
 		}
 	}
 	
