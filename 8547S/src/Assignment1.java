@@ -170,7 +170,8 @@ public class Assignment1 {
 			deleteFromHT(separateChainingHashTable, stringArrayForDeletion);
 			System.out.println();
 		}
-		System.out.println("Insertion and Deletion average time in nano second");
+		System.out.println();
+		System.out.println("Insertion(I) and Deletion(D) average time in nano second");
 	}
 	
 	public static void main(String[] args)
