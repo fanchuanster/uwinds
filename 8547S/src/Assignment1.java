@@ -147,7 +147,7 @@ public class Assignment1 {
 	 */
 	private static void testHashtable()
 	{
-		System.out.println("i\tCuck I\tCuck D\tQuad I\tQuad D\tSCh I\tSCh D");
+		System.out.println("i\tCuck I\tCuck D\tQuad I\tQuad D\tSpCh I\tSpCh D");
 		for (int i=1; i<=20; i++)
 		{
 			int n = (int) Math.pow(2, i);
