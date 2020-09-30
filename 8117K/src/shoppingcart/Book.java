@@ -1,12 +1,10 @@
-/**
- * 
- */
+
 package shoppingcart;
 
 /**
- * Book item of shopping cart, inherited from Item @see shoppingcart.Item
+ * Book item of shopping cart, inherited from Item
  * @author donwen
- * @since 30 Sep 2020
+ * @since 30 Sep 2020.
  */
 public class Book extends Item {
 
@@ -15,20 +13,21 @@ public class Book extends Item {
 	
 	/**
 	 * The sole constructor.
-	 * @param name
-	 * @param modelNumber
-	 * @param price
+	 * @param name book name
+	 * @param modelNumber model number
+	 * @param price book price
+	 * @param title book title
+	 * @param author author of the book
 	 */
 	public Book(String name, String modelNumber, float price, String title, String author) {
 		super(name, modelNumber, price);
 		this.title = title;
 		this.author = author;
-//		System.out.println("Book constructed");
 	}
 
 	@Override
 	public void displayItem() {
-		System.out.println(String.format("Book - <<%s>>, #%d, %s, $%f, %s, %s", name, itemId, modelNumber, price, title, author));
+		System.out.println(String.format("Book - <<%s>>, #%d, %s, $%.2f, %s, %s", name, itemId, modelNumber, price, title, author));
 	}
 
 }

@@ -15,11 +15,18 @@ public class ShoppingCart {
 	
 	private List<Item> shoppingItems = new ArrayList<Item>();
 	
+	/**
+	 * Add a product item to the cart.
+	 * @param product item
+	 */
 	public void addProduct(Item product)
 	{
 		shoppingItems.add(product);
 	}
 	
+	/**
+	 * Display detailed information of the added product items.
+	 */
 	public void displayProducts() {
 		float totalPrice = (float) shoppingItems.stream().mapToDouble(item -> item.getPrice()).sum();
 		for (Item item:shoppingItems) {
@@ -29,7 +36,8 @@ public class ShoppingCart {
 	}
 
 	/**
-	 * @param args
+	 * Application entry of this lab
+	 * @param args main arguments.
 	 */
 	public static void main(String[] args) {
 		ShoppingCart cart = new ShoppingCart();

@@ -6,7 +6,6 @@ package shoppingcart;
  * 
  * @author donwen
  * @since 30 Sep 2020
- *
  */
 
 public abstract class Item {
@@ -17,6 +16,13 @@ public abstract class Item {
 	
 	private static int idPivot = 0;
 	
+	/**
+	 * the constructor.
+	 * @param name item name
+	 * @param modelNumber item model number.
+	 * @param price item price
+	 */
+	
 	public Item(String name, String modelNumber, float price) {
 		this.name = name;
 		this.itemId = GetUniqueSequentialId();
@@ -26,7 +32,7 @@ public abstract class Item {
 	}
 	
 	
-	/*
+	/**
 	 * Print out the details information of the item.
 	 */
 	public abstract void displayItem();
@@ -35,7 +41,7 @@ public abstract class Item {
 		return price;
 	}
 	
-	/*
+	/**
 	 * A helper static method for generating incremental integer.
 	 * @return next sequential Id.
 	 */
