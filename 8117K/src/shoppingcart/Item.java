@@ -31,6 +31,10 @@ public abstract class Item {
 	 */
 	public abstract void displayItem();
 	
+	float getPrice() {
+		return price;
+	}
+	
 	/*
 	 * A helper static method for generating incremental integer.
 	 * @return next sequential Id.

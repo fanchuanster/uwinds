@@ -26,7 +26,7 @@ public class GiftCard extends Item {
 
 	@Override
 	public void displayItem() {
-		System.out.println(String.format("GiftCard - %s, #%d, %s, $%f, %s, %s", name, itemId, modelNumber, price, style));
+		System.out.println(String.format("GiftCard - %s, #%d, %s, $%f, %s", name, itemId, modelNumber, price, style));
 	}
 
 }
