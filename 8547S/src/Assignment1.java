@@ -1,10 +1,11 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Random;
+import java.util.stream.IntStream;
 
-//import hashTable.CuckooHashTable;
 import hashTable.*;
-
-
+import searchtrees.*;
 
 
 public class Assignment1 {
@@ -121,30 +122,68 @@ public class Assignment1 {
 		System.out.format("%d\t", totalTime/n);
 	}
 	
-	/*
-	 * static private void testTrees() { }
-
-	 * static private void testBSTree() { System.out.println("testBSTree start...");
-	 * BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
-	 * 
-	 * long startTime = System.currentTimeMillis(); int to = 100000; for (int i=1;
-	 * i<=to; i++) { bst.add(i); } long totalTimeAdd = System.currentTimeMillis( ) -
-	 * startTime;
-	 * 
-	 * startTime = System.currentTimeMillis(); int[] ints = aR.ints(to, 1,
-	 * to+1).toArray(); for (int i : ints) { int res = bst.get(i); assert res > 0 :
-	 * "Failed to get " + i; } long totalTimeGet = System.currentTimeMillis( ) -
-	 * startTime;
-	 * 
-	 * startTime = System.currentTimeMillis(); int from = 1; IntStream.range(1,
-	 * to+1).map(i -> to - i + from).forEachOrdered(n -> { bst.remove(n); }); long
-	 * totalTimeDeletion = System.currentTimeMillis( ) - startTime;
-	 * 
-	 * System.out.format("add %d\tget %d\tdelete %d%n", totalTimeAdd,totalTimeGet,
-	 * totalTimeDeletion);
-	 * 
-	 * }
+	
+	/**
+	 * part II - trees
 	 */
+	static private void insertTree(AVLTree<Integer> tree, int[] numbers) {
+		int n = numbers.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			tree.insert(numbers[i]);
+		}		
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%d\t", totalTime/n);	
+	}
+	
+	static private void deleteFromTree(AVLTree<Integer> tree, int[] numbers) {
+		int n = numbers.length;
+		
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			tree.remove(numbers[i]);
+			tree.checkBalance();
+		}
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%d\t", totalTime/n);
+	}
+	
+	static private void testTree(String treeType, int[] numbers, int[] findNumbers, int[] deleteNumbers) {
+		Object tree = null;
+		
+		int n = numbers.length;
+		long startTime = System.nanoTime();
+		for (int i=0; i<n; i++)
+		{
+			tree.insert(numbers[i]);
+		}		
+		long totalTime = System.nanoTime() - startTime;
+		
+		System.out.format("%d\t", totalTime/n);	
+	}
+	
+	static private void testTrees() {
+		final int n = 10000;
+		int[] numbers = IntStream.rangeClosed(1, n+1).toArray();
+		int[] randomNumbers = aR.ints(n, 1, n+1).toArray();
+		List reversedNumbers = Arrays.asList(numbers); 
+		Collections.reverse();
+		
+		BinarySearchTree<Integer> bsTree = new BinarySearchTree<Integer>();
+		insertTree(bsTree, numbers);
+		
+		AVLTree<Integer> avlTree = new AVLTree<Integer>();
+		insertTree(avlTree, numbers);
+		Collections.reverse(Arrays.asList(numbers));
+		deleteFromTree(avlTree, ArrayUtils.reverse(numbers));
+	  
+	}
+	 
 	private static void testHashtable()
 	{
 		System.out.println("i\tCuck I\tCuck D\tQuad I\tQuad D\tSpCh I\tSpCh D");
@@ -176,7 +215,8 @@ public class Assignment1 {
 	
 	public static void main(String[] args)
 	{
-		testHashtable();
+//		testHashtable();
+		testTrees();
 	}
 
 }
