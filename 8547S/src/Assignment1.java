@@ -196,7 +196,7 @@ public class Assignment1 {
 		case "avl":
 			return new AVLTree<Integer>();
 		case "rb":
-			return new RedBlackTree<Integer>();
+			return new RedBlackBST<Integer, Integer>();
 		case "splay":
 			return new SplayTree<Integer>();
 		default:
@@ -205,6 +205,7 @@ public class Assignment1 {
 	}
 	
 	private static void testTree(String treeType, int[] numbers, int[] findNumbers, int[] deleteNumbers) {
+		System.out.print(String.format("%s\t", treeType));
 		Object treeObject = CreateTree(treeType);
 		actionTree(treeObject, "insert", numbers);
 		actionTree(treeObject, "search", findNumbers);
@@ -220,8 +221,8 @@ public class Assignment1 {
 		
 		testTree("bs", numbers, randomNumbers, reversedNumbers);
 		testTree("avl", numbers, randomNumbers, reversedNumbers);
-		testTree("bs", numbers, randomNumbers, reversedNumbers);
-//		testTree("bs", numbers, randomNumbers, reversedNumbers);
+		testTree("rb", numbers, randomNumbers, reversedNumbers);
+		testTree("splay", numbers, randomNumbers, reversedNumbers);
 	  
 	}
 	 
