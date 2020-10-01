@@ -126,61 +126,102 @@ public class Assignment1 {
 	/**
 	 * part II - trees
 	 */
-	static private void insertTree(AVLTree<Integer> tree, int[] numbers) {
+	@SuppressWarnings("unchecked")
+	static private void actionTree(Object treeObject, String action, int[] numbers) {
+		
 		int n = numbers.length;
 		
 		long startTime = System.nanoTime();
-		for (int i=0; i<n; i++)
-		{
-			tree.insert(numbers[i]);
-		}		
-		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%d\t", totalTime/n);	
-	}
-	
-	static private void deleteFromTree(AVLTree<Integer> tree, int[] numbers) {
-		int n = numbers.length;
-		
-		long startTime = System.nanoTime();
-		for (int i=0; i<n; i++)
-		{
-			tree.remove(numbers[i]);
-			tree.checkBalance();
+		if (treeObject instanceof AVLTree<?>) {
+			AVLTree<Integer> tree = (AVLTree<Integer>) treeObject;
+			for (int i=0; i<n; i++)
+			{
+				if (action.equals("insert")) {
+					tree.insert(numbers[i]);
+					tree.checkBalance();
+				} else if (action.equals("search")) {
+					tree.contains(numbers[i]);
+				} else if (action.equals("deletion")) {
+					tree.remove(numbers[i]);
+					tree.checkBalance();
+				}
+			}
+		} else if (treeObject instanceof BinarySearchTree<?>) {
+			BinarySearchTree<Integer> tree = (BinarySearchTree<Integer>) treeObject;
+			for (int i=0; i<n; i++) {
+				if (action.equals("insert")) {
+					tree.insert(numbers[i]);
+				} else if (action.equals("search")) {
+					tree.contains(numbers[i]);
+				} else if (action.equals("deletion")) {
+					tree.remove(numbers[i]);
+				}
+			}
+		} else if (treeObject instanceof RedBlackBST<?, ?>) {
+			RedBlackBST<Integer, Integer> tree = (RedBlackBST<Integer, Integer>) treeObject;
+			for (int i=0; i<n; i++)
+			{
+				if (action.equals("insert")) {
+					tree.put(numbers[i], numbers[i]);
+				} else if (action.equals("search")) {
+					tree.get(numbers[i]);
+				} else if (action.equals("deletion")) {
+					tree.delete(numbers[i]);
+				}
+			}
+		} else if (treeObject instanceof SplayTree<?>) {
+			SplayTree<Integer> tree = (SplayTree<Integer>) treeObject;
+			for (int i=0; i<n; i++)
+			{
+				if (action.equals("insert")) {
+					tree.insert(numbers[i]);
+				} else if (action.equals("search")) {
+					tree.contains(numbers[i]);
+				} else if (action.equals("deletion")) {
+					tree.remove(numbers[i]);
+				}
+			}
 		}
-		long totalTime = System.nanoTime() - startTime;
 		
-		System.out.format("%d\t", totalTime/n);
-	}
-	
-	static private void testTree(String treeType, int[] numbers, int[] findNumbers, int[] deleteNumbers) {
-		Object tree = null;
-		
-		int n = numbers.length;
-		long startTime = System.nanoTime();
-		for (int i=0; i<n; i++)
-		{
-			tree.insert(numbers[i]);
-		}		
 		long totalTime = System.nanoTime() - startTime;
 		
 		System.out.format("%d\t", totalTime/n);	
 	}
 	
+	private static Object CreateTree(String treeType) {
+		switch (treeType) {
+		case "bs":
+			return new BinarySearchTree<Integer>();
+		case "avl":
+			return new AVLTree<Integer>();
+		case "rb":
+			return new RedBlackTree<Integer>();
+		case "splay":
+			return new SplayTree<Integer>();
+		default:
+			return null;
+		}
+	}
+	
+	private static void testTree(String treeType, int[] numbers, int[] findNumbers, int[] deleteNumbers) {
+		Object treeObject = CreateTree(treeType);
+		actionTree(treeObject, "insert", numbers);
+		actionTree(treeObject, "search", findNumbers);
+		actionTree(treeObject, "deletion", deleteNumbers);
+		System.out.println();
+	}
+	 
 	static private void testTrees() {
-		final int n = 10000;
-		int[] numbers = IntStream.rangeClosed(1, n+1).toArray();
+		final int n = 100000;
+		int[] numbers = IntStream.rangeClosed(1, n).toArray();
 		int[] randomNumbers = aR.ints(n, 1, n+1).toArray();
-		List reversedNumbers = Arrays.asList(numbers); 
-		Collections.reverse();
+		int[] reversedNumbers = IntStream.rangeClosed(1, numbers.length).map(i -> numbers[numbers.length-i]).toArray();
 		
-		BinarySearchTree<Integer> bsTree = new BinarySearchTree<Integer>();
-		insertTree(bsTree, numbers);
-		
-		AVLTree<Integer> avlTree = new AVLTree<Integer>();
-		insertTree(avlTree, numbers);
-		Collections.reverse(Arrays.asList(numbers));
-		deleteFromTree(avlTree, ArrayUtils.reverse(numbers));
+		testTree("bs", numbers, randomNumbers, reversedNumbers);
+		testTree("avl", numbers, randomNumbers, reversedNumbers);
+		testTree("bs", numbers, randomNumbers, reversedNumbers);
+//		testTree("bs", numbers, randomNumbers, reversedNumbers);
 	  
 	}
 	 
