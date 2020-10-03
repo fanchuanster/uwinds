@@ -167,7 +167,9 @@ public class Assignment1 {
 				} else if (action.equals("search")) {
 					tree.get(numbers[i]);
 				} else if (action.equals("deletion")) {
-					tree.delete(numbers[i]);
+					if (tree.get(numbers[i]) != null) {
+						tree.delete(numbers[i]);
+					}
 				}
 			}
 		} else if (treeObject instanceof SplayTree<?>) {
@@ -204,12 +206,19 @@ public class Assignment1 {
 		}
 	}
 	
-	private static void testTree(String treeType, int[] numbers, int[] findNumbers, int[] deleteNumbers) {
+	private static void testTree(String treeType, int[] numbers, int[] randomNumbers, int[] randomNumbers2, int[] reversedNumbers) {
 		System.out.print(String.format("%s\t", treeType));
+		
 		Object treeObject = CreateTree(treeType);
 		actionTree(treeObject, "insert", numbers);
-		actionTree(treeObject, "search", findNumbers);
-		actionTree(treeObject, "deletion", deleteNumbers);
+		actionTree(treeObject, "search", randomNumbers);
+		actionTree(treeObject, "deletion", reversedNumbers);
+		
+		Object treeObject2 = CreateTree(treeType);
+		actionTree(treeObject2, "insert", randomNumbers);
+		actionTree(treeObject2, "search", randomNumbers2);
+		actionTree(treeObject2, "deletion", randomNumbers2);
+		
 		System.out.println();
 	}
 	 
@@ -217,12 +226,15 @@ public class Assignment1 {
 		final int n = 100000;
 		int[] numbers = IntStream.rangeClosed(1, n).toArray();
 		int[] randomNumbers = aR.ints(n, 1, n+1).toArray();
+		int[] randomNumbers2 = aR.ints(n, 1, n+1).toArray();
 		int[] reversedNumbers = IntStream.rangeClosed(1, numbers.length).map(i -> numbers[numbers.length-i]).toArray();
 		
-		testTree("bs", numbers, randomNumbers, reversedNumbers);
-		testTree("avl", numbers, randomNumbers, reversedNumbers);
-		testTree("rb", numbers, randomNumbers, reversedNumbers);
-		testTree("splay", numbers, randomNumbers, reversedNumbers);
+		System.out.println("tree\t4.a\t4.b\t4.c\t5.a\t5.b\t5.c");
+		
+		testTree("bs", numbers, randomNumbers, randomNumbers2, reversedNumbers);
+		testTree("avl", numbers, randomNumbers, randomNumbers2, reversedNumbers);
+		testTree("rb", numbers, randomNumbers, randomNumbers2, reversedNumbers);
+		testTree("splay", numbers, randomNumbers, randomNumbers2, reversedNumbers);
 	  
 	}
 	 
@@ -238,7 +250,7 @@ public class Assignment1 {
 			String[] strList = createRandomStringArray(n);
 			String[] stringArrayForDeletion = createRandomStringArray(n);
 			
-			CuckooHashTable<String> cuckooHashTable = new CuckooHashTable<String>(new StringHashFamily(100), 10000);
+			CuckooHashTable<String> cuckooHashTable = new CuckooHashTable<String>(new StringHashFamily(3), 2000);
 			insertHT(cuckooHashTable, strList);
 			deleteFromHT(cuckooHashTable, stringArrayForDeletion);
 			
