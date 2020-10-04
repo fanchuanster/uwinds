@@ -99,10 +99,10 @@ public class TestHashTables {
 	
 	public static void main(String[] args)
 	{
-		final int RANDOM_STRING_LENGTH = 10;
+		final int STRING_LENGTH = 10;
 		final int MAX_EXP = 20;
 		
-		System.out.println("Insertion(I) and Deletion(D) average time in nano seconds:");
+		System.out.println("Insertion(I) and Deletion(D) average time in nano seconds along with pow(2, i):");
 		System.out.println("----------------------------------------------------------------------");
 		System.out.println("i\tCuck I\tCuck D\tQuad I\tQuad D\tSpCh I\tSpCh D");
 		for (int i=1; i<=MAX_EXP; i++)
@@ -111,8 +111,8 @@ public class TestHashTables {
 			
 			System.out.format("%d\t", i);
 			
-			String[] strList = RandomStringGenerator.createRandomStringArray(n, RANDOM_STRING_LENGTH);
-			String[] stringArrayForDeletion = RandomStringGenerator.createRandomStringArray(n, RANDOM_STRING_LENGTH);
+			String[] strList = RandomStringGenerator.createRandomStringArray(n, STRING_LENGTH);
+			String[] stringArrayForDeletion = RandomStringGenerator.createRandomStringArray(n, STRING_LENGTH);
 			
 			CuckooHashTable<String> cuckooHashTable = new CuckooHashTable<String>(new StringHashFamily(3), 2000);
 			insertHT(cuckooHashTable, strList);

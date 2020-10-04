@@ -141,6 +141,7 @@ public class TestTrees {
 	public static void main(String[] args) {
 		Random aR = new Random();
 		final int n = 100000;
+		
 		int[] numbers = IntStream.rangeClosed(1, n).toArray();
 		int[] randomNumbers = aR.ints(n, 1, n+1).toArray();
 		int[] randomNumbers2 = aR.ints(n, 1, n+1).toArray();
