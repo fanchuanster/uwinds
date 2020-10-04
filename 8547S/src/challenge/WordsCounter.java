@@ -6,12 +6,11 @@ package challenge;
 import java.util.Hashtable;
 import java.util.stream.IntStream;
 import java.io.StreamTokenizer;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Count words occurrence in input files.
+ * Count occurrences for each word in input files.
  * @author donwen
  *
  */
@@ -42,11 +41,8 @@ public class WordsCounter {
 					String word = tokenizer.sval;
 					int count = ht.containsKey(word) ? ht.get(word) : 0; 
 					ht.put(word, count + 1);
-//					System.out.println(word + (count + 1));
-//					System.out.println(ht.toString());
 					break;
 				default:
-//					System.err.println(token);
 					break;
 				}
 				token = tokenizer.nextToken();
@@ -55,7 +51,6 @@ public class WordsCounter {
 			System.err.println("Failed to nextToken " + filePath);
 			e.printStackTrace();
 		}
-//		System.out.println(ht.toString());
 		return ht;
 	}
 
