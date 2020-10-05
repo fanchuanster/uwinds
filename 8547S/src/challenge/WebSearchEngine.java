@@ -57,24 +57,24 @@ public class WebSearchEngine {
 		final boolean REVERSE_COMPARE = true;
 		final int LIST_TOP_N_SCORE = 10;
 
-		BinaryHeap<FileScore> heap = new BinaryHeap<FileScore>();
+		BinaryHeap<IntKeyObject> heap = new BinaryHeap<IntKeyObject>();
 		
 		File dir = new File(INPUT_DIR);
 		File[] directoryListing = dir.listFiles();
 		if (directoryListing != null) {
 		  for (File file : directoryListing) {
 		  	int score = GetFileMatchScore(file.getAbsolutePath(), keywords);
-		  	heap.insert(new FileScore(file.getName(), score, REVERSE_COMPARE));
+		  	heap.insert(new IntKeyObject(score, file.getName(), REVERSE_COMPARE));
 		  }
 		}
 		
 		System.out.println(String.format("-----------Top %d returned pages-----------:", LIST_TOP_N_SCORE));
 		System.out.println("Score\tFile Name");
 		
-		FileScore fs = null;
+		IntKeyObject fs = null;
 		int i = 0;
 		while ((fs = heap.deleteMin()) != null && i++ < LIST_TOP_N_SCORE) {
-			System.out.println(String.format("%d\t%s", fs.getScore(), fs.getFile()));
+			System.out.println(String.format("%d\t%s", fs.getKey(), fs.getContent()));
 		}
 	}
 }
