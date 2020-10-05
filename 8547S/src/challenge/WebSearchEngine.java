@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
  *
  */
 public class WebSearchEngine {
+	public static final String INPUT_PAGES_DIR = "resources\\W3C Web Pages\\Text\\";
 	
 	public static int GetFileMatchScore(String filePath, String[] keywords) {
 		Hashtable<String, Integer> hashtable = WordsCounter.CountWords(filePath);
@@ -50,21 +51,20 @@ public class WebSearchEngine {
         System.out.println("Searching keywords:");
         for (String k:keywords) {
         	System.out.println(k);
-        }
-        
+        }        
 		
-		final String INPUT_DIR = "resources\\W3C Web Pages\\Text\\";
-		final boolean REVERSE_COMPARE = true;
+		
+		final boolean ASCENDING = false;
 		final int LIST_TOP_N_SCORE = 10;
 
 		BinaryHeap<IntKeyObject> heap = new BinaryHeap<IntKeyObject>();
 		
-		File dir = new File(INPUT_DIR);
+		File dir = new File(INPUT_PAGES_DIR);
 		File[] directoryListing = dir.listFiles();
 		if (directoryListing != null) {
 		  for (File file : directoryListing) {
 		  	int score = GetFileMatchScore(file.getAbsolutePath(), keywords);
-		  	heap.insert(new IntKeyObject(score, file.getName(), REVERSE_COMPARE));
+		  	heap.insert(new IntKeyObject(score, file.getName(), ASCENDING));
 		  }
 		}
 		

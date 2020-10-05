@@ -4,7 +4,6 @@
 package challenge;
 
 import java.util.Hashtable;
-import java.util.stream.IntStream;
 import java.io.StreamTokenizer;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,6 +15,11 @@ import java.io.IOException;
  */
 public class WordsCounter {
 
+	/**
+	 * Count words frequencies in a given file.
+	 * @param filePath the file to count words in
+	 * @return a hash table with each word as the key and the corresponding frequency as value.
+	 */
 	public static Hashtable<String, Integer> CountWords(String filePath) {
 		FileReader fr = null;
 		try {

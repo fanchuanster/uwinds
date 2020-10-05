@@ -3,12 +3,12 @@ package challenge;
 public class IntKeyObject implements Comparable<IntKeyObject> {
 	private Object val;
 	private Integer key;
-	private boolean reverseCompare;
+	private boolean ascending;
 	
-	public IntKeyObject(int key, Object val, boolean reverseCompare) {
+	public IntKeyObject(int key, Object val, boolean ascending) {
 		this.key = key;
 		this.val = val;
-		this.reverseCompare = reverseCompare;
+		this.ascending = ascending;
 	}
 	
 	public Object getContent() {
@@ -20,7 +20,7 @@ public class IntKeyObject implements Comparable<IntKeyObject> {
 
 	@Override
 	public int compareTo(IntKeyObject other) {
-		return reverseCompare ? other.getKey().compareTo(this.getKey()) : getKey().compareTo(other.getKey());
+		return ascending ? getKey().compareTo(other.getKey()) : other.getKey().compareTo(this.getKey());
 	}
 	
 }
