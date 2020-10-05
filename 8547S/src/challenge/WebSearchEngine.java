@@ -32,6 +32,7 @@ public class WebSearchEngine {
 	}
 
 	/**
+	 * It answers Challenge.3
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -41,6 +42,7 @@ public class WebSearchEngine {
         Scanner sc = new Scanner(System.in);
         List<String> keywordsList = new ArrayList<String>();
         String inputLine = sc.nextLine();
+        sc.close();
         StringTokenizer tokenizer = new StringTokenizer(inputLine);
         while (tokenizer.hasMoreTokens()) {
         	keywordsList.add(tokenizer.nextToken());

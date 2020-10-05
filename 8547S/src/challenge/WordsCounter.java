@@ -16,7 +16,7 @@ import java.io.IOException;
 public class WordsCounter {
 
 	/**
-	 * Count words frequencies in a given file.
+	 * Count words frequencies in a given file, it answers Challenge.2
 	 * @param filePath the file to count words in
 	 * @return a hash table with each word as the key and the corresponding frequency as value.
 	 */
