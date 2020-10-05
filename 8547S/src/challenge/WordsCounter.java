@@ -4,6 +4,7 @@
 package challenge;
 
 import java.util.Hashtable;
+import java.util.Scanner;
 import java.io.StreamTokenizer;
 import java.io.FileReader;
 import java.io.IOException;
@@ -62,12 +63,32 @@ public class WordsCounter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
-		Hashtable<String, Integer> ht = CountWords("resources\\W3C Web Pages\\Text\\Accessibility - W3C.txt");
+		final String pathOfFileToCheck = "resources\\W3C Web Pages\\Text\\Accessibility - W3C.txt";
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String chosenFile = null;
+		while (chosenFile == null) {
+			System.out.println("Which file to process? choose one of the numbers to continue..");
+			System.out.println("1 - default file '" + pathOfFileToCheck + "'");
+			System.out.println("2 - enter the full path of your file");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			switch (choice) {
+			case 1:
+				chosenFile = pathOfFileToCheck;
+				break;
+			case 2:
+				chosenFile = sc.nextLine();
+				break;
+			}
+		}
+		sc.close();
+		
+		System.out.println("Couting words frequencies in '" + chosenFile + "'...");
+		Hashtable<String, Integer> ht = CountWords(chosenFile);
 
-		System.out.println(ht.size());
-		
-		
+		System.out.println("In all " + ht.size() + " keywords in the file.");		
 	}
 
 }
