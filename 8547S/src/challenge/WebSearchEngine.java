@@ -69,6 +69,7 @@ public class WebSearchEngine {
 		}
 		
 		System.out.println(String.format("-----------Top %d returned pages-----------:", LIST_TOP_N_SCORE));
+		System.out.println("Score\tFile Name");
 		
 		FileScore fs = null;
 		int i = 0;
