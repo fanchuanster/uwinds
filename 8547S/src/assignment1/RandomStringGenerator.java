@@ -24,13 +24,13 @@ public class RandomStringGenerator {
 	{
 		assert length <= MAX_STRING_LENGTH : "too long a length for random string to create.";
 		
-		int[] intArray = aR.ints(length, 'A', 'z'+1).toArray();
+		int[] intArray = aR.ints(length, 'a', 'z'+1).toArray();
 		
 		for (int i=0; i<length; i++)
 		{
 			charArray[i] = (char)intArray[i];
 		}
-		return String.valueOf(charArray);
+		return String.valueOf(charArray).substring(0, length);
 	}
 	
 	/**
@@ -51,10 +51,10 @@ public class RandomStringGenerator {
 	
 	public static void main(String[] args) 
 	{
-		String[] ss = createRandomStringArray(1, 2);
+		String[] ss = createRandomStringArray(10, 2);
 		for (String s:ss)
 		{
-			System.out.println(s);
+			System.out.print(s + ",");
 		}
 	}
 }

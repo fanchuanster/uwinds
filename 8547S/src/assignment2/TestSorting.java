@@ -11,16 +11,17 @@ import java.util.Arrays;
  * @author donwen
  *
  */
-public class TestSortingNumbers {
-	static final long LONG_MAX = 2147483647;
+public class TestSorting {
+	
 	
 	/**
 	 * Test a given algorithm
-	 * @param algorithmName the algorithm name to test, it can be Mergesort, Quicksort, Heapsort or dual-pivot Quicksort.
+	 * @param algorithmName the algorithm name to test, it can be Mergesort, Quicksort, Heapsort or dual-pivot.
 	 * @param numbers the input numbers array to sort
 	 * @return time in milliseconds it has taken to sort 
 	 */
-	public static long testSorting(String algorithmName, Long[] numbers) {
+	public static <AnyType extends Comparable<? super AnyType>>
+	long testSorting(String algorithmName, AnyType[] numbers) {
 		long start = System.currentTimeMillis();
 		if (algorithmName.equals("Mergesort")) {
 			Sort.mergeSort(numbers);
@@ -28,19 +29,21 @@ public class TestSortingNumbers {
 			Sort.quicksort(numbers);
 		} else if (algorithmName.equals("Heapsort")) {
 			Sort.heapsort(numbers);
-		} else if (algorithmName.equals("dual-pivot Quicksort")) {
-//			Sort.
+		} else if (algorithmName.equals("dual-pivot")) {
+			Arrays.sort(numbers);
 		} else {
 			System.err.println("Unknown algorithm name " + algorithmName);
 		}
 		return System.currentTimeMillis() - start;
 	}
 	
-	private static Long[] getRandomLongArray(long n) {
+	private static Long[] getRandomLongArray(int n) {
+		final long LONG_MAX = 2147483647;
 		Random aR = new Random(System.currentTimeMillis());
+		
 		long[] primitiveNumbers = aR.longs(n, 0, LONG_MAX).toArray();
-		Long[] numbers = new Long[primitiveNumbers.length];
-		for (int i=0; i<primitiveNumbers.length; i++) {
+		Long[] numbers = new Long[n];
+		for (int i=0; i<n; i++) {
 			numbers[i] = primitiveNumbers[i];
 		}
 		return numbers;
@@ -50,24 +53,23 @@ public class TestSortingNumbers {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		final long n = 100000;
-		final int TEST_TIMES = 10;
+		final int n = 100000;
+		final int TEST_TIMES = 100;
 		
-		String[] algorithms = { "Mergesort", "Quicksort", "Heapsort", /* "dual-pivot Quicksort" */ };
+		String[] algorithms = { "Mergesort", "Quicksort", "Heapsort",  "dual-pivot"  };
 		
-		System.out.println(String.format("Testing sorting algorithms with %d random numbers for %d times, average time as below:", n, TEST_TIMES));
+		System.out.println(String.format("Testing sorting %d random numbers for %d times, average time as below:", n, TEST_TIMES));
 		System.out.println(("Algorithsm\tAvg time(ms)"));
 		
 		for (String algorithm:algorithms) {
 			int totalTime = 0;
 			for (int i=0; i<TEST_TIMES; i++) {
 				Long[] numbers = getRandomLongArray(n);
-
 				totalTime += testSorting(algorithm, numbers);
 			}
 			
 			System.out.println(String.format("%s\t%d", algorithm, totalTime/TEST_TIMES));
-		}		
+		}	
 	}
 
 }
