@@ -43,8 +43,7 @@ public class TestSortingStrings {
 		System.out.println("\n------------------------------------------------------");
 		
 		for (String algorithm:algorithms) {
-//			System.out.print(algorithm + "\t|\t");
-			System.out.print(algorithm + "\t\t");
+			System.out.print(algorithm + "\t|\t");
 			for (int i=0; i<STRING_LENGTHS.length; i++) {
 				int totalTime = 0;
 				for (int j=0; j<TEST_TIMES; j++) {
