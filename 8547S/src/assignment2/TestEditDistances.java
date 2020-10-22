@@ -28,7 +28,7 @@ public class TestEditDistances {
 		final int[] STRING_LENGTHS = {10, 20, 50, 100};
 		
 		System.out.println(String.format("Calculating Edit Distance for %d pairs of random strings:", PAIRS_NUMBER));
-		System.out.println(("Pairs\tStrLen\tAvg time(ms)"));
+		System.out.println(("Pairs\tStrLen\tAvg time(ns)"));
 		
 		for (int len : STRING_LENGTHS) {
 			testEditInstances(PAIRS_NUMBER, len);
