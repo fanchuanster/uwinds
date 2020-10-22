@@ -20,7 +20,7 @@ public class RandomStringGenerator {
 	 * @param length the length of the string to create.
 	 * @return the created random string.
 	 */
-	static private String createRandomString(int length)
+	static public String createRandomString(int length)
 	{
 		assert length <= MAX_STRING_LENGTH : "too long a length for random string to create.";
 		

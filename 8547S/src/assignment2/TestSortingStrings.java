@@ -35,7 +35,7 @@ public class TestSortingStrings {
 		
 		String[] algorithms = { "Mergesort" , "Quicksort", "Heapsort", "dual-pivot", "Radixsort" };
 		
-		System.out.println(String.format("Testing sorting %d random strings for %d times, average time as below:", n, TEST_TIMES));
+		System.out.println(String.format("Testing sorting %d random strings for %d times:", n, TEST_TIMES));
 		System.out.print("Avg time(ms)\t|\t");
 		for (int i=0; i<STRING_LENGTHS.length; i++) {
 			System.out.print(STRING_LENGTHS[i] + "\t");
