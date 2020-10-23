@@ -2,15 +2,29 @@ package tictaetoe;
 
 import java.util.Random;
 
+/**
+ * the implementation of a AIPlayer
+ * @author donwen
+ *
+ */
 public class AIPlayer extends Player {
 	
 	private Random aR = new Random();
 
+	/**
+	 * the constructor of the AIPlayer
+	 * @param name name of the player.
+	 * @param symbol symbol of the player.
+	 */
 	public AIPlayer(String name, int symbol) {
 		super(name, symbol);
 	}
 
 
+	/**
+	 * play a position on the given board.
+	 * @param board the board on which to play position.
+	 */
 	@Override
 	public void play(Board board) {
 		Block playBlock = senseWin(board);
@@ -82,6 +96,7 @@ public class AIPlayer extends Player {
 			return null;
 		}
 	}
+	
 	/**
 	 * check if in the given array there is a block which can lead to loss if play by opponent
 	 * @param blocks the blocks to check
@@ -192,6 +207,9 @@ public class AIPlayer extends Player {
 	}
 
 
+	/**
+	 * get a string representation of the player.
+	 */
 	@Override
 	public String toString() {
 		return String.format("AIPlayer %s _%c", this.name, this.symbol);
