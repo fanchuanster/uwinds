@@ -4,6 +4,7 @@
 package tictaetoe;
 
 /**
+ * global constants shared among classes.
  * @author donwen
  *
  */

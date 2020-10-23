@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * this is the domain class for the game bot.
  * @author donwen
  *
  */
@@ -15,6 +16,9 @@ public class Game implements Global {
 	private Player player_x;
 	private Player player_o;
 	
+	/**
+	 * prompt user to choose what players to play.
+	 */
 	private void choosePlayers() {
 		System.out.println("Game Bot:Welcome to TicTacToe for the Java 212 Kobti class.");
 		

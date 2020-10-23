@@ -5,6 +5,7 @@ package tictaetoe;
 import java.util.Arrays;
 
 /**
+ * representation of the game borad.
  * @author donwen
  *
  */
@@ -37,6 +38,10 @@ public class Board implements Global {
 		}			
 	}
 	
+	/**
+	 * get all blocks on the board.
+	 * @return all the blocks in two-dimension array
+	 */
 	public Block[][] getBlocks() {
 		return blocks;
 	}

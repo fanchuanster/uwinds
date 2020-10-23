@@ -5,6 +5,7 @@ package tictaetoe;
 import java.util.Scanner;
 
 /**
+ * represents a human player
  * @author donwen
  *
  */
@@ -12,13 +13,18 @@ public class HumanPlayer extends Player {
 	private Scanner scanner = new Scanner(System.in);
 
 	/**
-	 * @param name
-	 * @param symbol
+	 * constructor of the class.
+	 * @param name player's name
+	 * @param symbol player's symbol
 	 */
 	public HumanPlayer(String name, int symbol) {
 		super(name, symbol);
 	}
 
+	/**
+	 * play a position on the given board.
+	 * @param board the board on which to play block.
+	 */
 	@Override
 	public void play(Board board) {
 		boolean played = false;
@@ -37,9 +43,13 @@ public class HumanPlayer extends Player {
 			} else {
 				System.out.println("Failed to play " + number);
 			}
-		}
-		
+		}		
 	}
+	
+	/**
+	 * get the string representation of the player.
+	 * @return  the string representation of the player.
+	 */
 
 	@Override
 	public String toString() {
