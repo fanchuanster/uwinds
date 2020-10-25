@@ -74,10 +74,8 @@ public class Game implements Global {
 		int turn = dice % 2;
 		
 		while (board.getState() == EMPTY) {
-			System.out.println(String.format("--------turn %d---------", turn));
-			board.displayBoard();
 			
-			switch (turn++ % 2) {
+			switch (turn % 2) {
 			case 0:
 				player_x.play(board);
 				break;
@@ -88,6 +86,10 @@ public class Game implements Global {
 				System.out.println("Unknown player turn..");
 				break;
 			}
+			
+			System.out.println(String.format("--------turn %d---------", turn));
+			board.displayBoard();
+			turn++;
 			
 		}
 		if (DRAW == board.getState()) {

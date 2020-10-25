@@ -30,13 +30,20 @@ public class AIPlayer extends Player {
 		Block playBlock = senseWin(board);
 		if (playBlock != null) {
 			playBlock.setState(this.symbol);
-			System.out.println(String.format("sensed win (%d,%d)", playBlock.X, playBlock.Y));
+//			System.out.println(String.format("sensed win (%d,%d)", playBlock.X, playBlock.Y));
 			return;
 		}
 		playBlock = senseLoss(board);
 		if (playBlock != null) {
 			playBlock.setState(this.symbol);
-			System.out.println(String.format("sensed loss (%d,%d)", playBlock.X, playBlock.Y));
+//			System.out.println(String.format("sensed loss (%d,%d)", playBlock.X, playBlock.Y));
+			return;
+		}
+		
+		Block[][] blocks = board.getBlocks();
+		
+		Block middleBlock = blocks[1][1];
+		if (middleBlock.setState(this.symbol)) {
 			return;
 		}
 		
@@ -45,8 +52,8 @@ public class AIPlayer extends Player {
 		 */
 		boolean played = false;
 		int r = aR.nextInt(9);
-		System.out.println(String.format("sensed none random r %d", r));
-		Block[][] blocks = board.getBlocks();
+//		System.out.println(String.format("sensed none random r %d", r));
+		
 		for (int i=0; i<blocks.length && !played; i++) {
 			for (int j=0; j<blocks[i].length; j++) {
 				if (blocks[i][j].getState() == EMPTY) {

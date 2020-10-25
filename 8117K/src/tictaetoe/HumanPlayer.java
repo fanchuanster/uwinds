@@ -41,7 +41,7 @@ public class HumanPlayer extends Player {
 			if (block.setState(this.symbol)) {
 				played = true;
 			} else {
-				System.out.println("Failed to play " + number);
+				System.out.println("Cannot play position " + number);
 			}
 		}		
 	}
