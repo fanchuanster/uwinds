@@ -10,7 +10,7 @@ import graphs.*;
  * @author donwen
  *
  */
-public class TestLargeDGDfs {
+public class TestDfS {
 	
 	public static final String INPUT_DATA_DIR = "resources\\graphs\\";
 
