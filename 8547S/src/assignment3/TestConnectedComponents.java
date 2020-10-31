@@ -3,6 +3,8 @@ package assignment3;
 import graphs.CC;
 import graphs.Graph;
 import graphs.Queue;
+import graphs.StdIn;
+import graphs.StdOut;
 import graphs.SymbolGraph;
 
 public class TestConnectedComponents {
@@ -11,7 +13,6 @@ public class TestConnectedComponents {
 		String dgFileName = "movies.txt";
 		SymbolGraph sg = new SymbolGraph(TestDfS.INPUT_DATA_DIR + dgFileName, "/");
         Graph G = sg.G();
-        
         
         long start = System.currentTimeMillis();
         CC cc = new CC(G);
@@ -41,6 +42,20 @@ public class TestConnectedComponents {
         
         System.out.println(componentsNumber + " components in all.");
         System.out.println(String.format("It took %d ms to use DFS identifying the components.", end-start));
+        
+        String[] actors = {"DiCaprio, Leonardo", "Roberts, Julia (I)", "Grant, Hugh (I)"};
+        for (String actor:actors) {
+        	if (sg.contains(actor)) {
+                int s = sg.index(actor);
+                System.out.println("Movies starred by " + actor);
+                for (int v : G.adj(s)) {
+                    StdOut.println("   " + sg.name(v));
+                }
+            }
+            else {
+                StdOut.println("input does not contain '" + actor + "'\n");
+            }
+        }
 	}
 
 }
