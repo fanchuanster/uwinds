@@ -1,6 +1,5 @@
 package assignment3;
 
-import java.util.Collection;
 import java.util.stream.StreamSupport;
 
 import graphs.CC;
