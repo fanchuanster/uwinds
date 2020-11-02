@@ -6,7 +6,6 @@ import java.util.stream.StreamSupport;
 import graphs.CC;
 import graphs.Graph;
 import graphs.Queue;
-import graphs.StdOut;
 import graphs.SymbolGraph;
 
 public class TestConnectedComponents {
@@ -21,7 +20,7 @@ public class TestConnectedComponents {
         int componentsNumber = cc.count();
         long end = System.currentTimeMillis();
 
-        System.out.println(componentsNumber + " components");
+        System.out.println(componentsNumber + " connected components found in " + dgFileName);
 
         Queue<Integer>[] components = (Queue<Integer>[]) new Queue[componentsNumber];
         for (int i = 0; i < componentsNumber; i++) {
@@ -32,12 +31,12 @@ public class TestConnectedComponents {
         }
 
         // print connected components.
-        for (int i = 0; i < componentsNumber; i++) {
-            for (int v : components[i]) {
-            	System.out.print(v + " ");
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < componentsNumber; i++) {
+//            for (int v : components[i]) {
+//            	System.out.print(v + " ");
+//            }
+//            System.out.println();
+//        }
         
         System.out.println(String.format("Task #3 - It took %d ms to use DFS identifying the components and %d connected components identified in %s.", end-start, componentsNumber, dgFileName));
         
@@ -55,7 +54,7 @@ public class TestConnectedComponents {
             	System.out.println("did not find movies starred by '" + actor + "'\n");
             }
         }
-        System.out.println("Movies starred by boty Roberts, Julia (I) and Grant, Hugh (I):");
+        System.out.println("Movies starred by both Roberts, Julia (I) and Grant, Hugh (I):");
 		int sRobertsJulia = sg.index("Roberts, Julia (I)");
 		int sGrantHugh = sg.index("Grant, Hugh (I)");
         for (int v : G.adj(sRobertsJulia)) {

@@ -33,12 +33,12 @@ public class TestAllPairsSP {
         
 		double[][] shortestDistances = new double[G.V()][G.V()];
 		
-		System.out.println(String.format("Find shortest path for all pairs - %s", dgFileName));
+		System.out.println(String.format("Task #2 - Find shortest path for all pairs in %s", dgFileName));
 		
 		long start = System.currentTimeMillis();
 		
 		for (int s=0; s<G.V(); s++) {
-			// compute shortest paths
+			// compute shortest paths with Dijkstra algorithm.
 	        DijkstraSP sp = new DijkstraSP(G, s);
 
 	        for (int t = 0; t < G.V(); t++) {
@@ -51,20 +51,32 @@ public class TestAllPairsSP {
 	        }
 		}
 		long total = System.currentTimeMillis() - start;
+		System.out.println(String.format("Total time spent: %d ms.", total));
 		
+		int outputMatrixSize = 10;
 		String outfile = "sp_all_pairs.txt";
 		BufferedWriter out = null;
+		
+		System.out.println(String.format("Here is a snippet of shortest paths matrix(%d X %d), see full results in %s", outputMatrixSize, outputMatrixSize, outfile));
+		
 		try {
 			out = new BufferedWriter(new FileWriter(outfile));
 			for (int i=0; i<G.V(); i++) {
 				for (int j=0; j<G.V(); j++) {
+					String spString = "N   ";
 					if (shortestDistances[i][j] >= 0) {
-						out.write(String.format("%.2f\t", shortestDistances[i][j]));
-					} else {
-						out.write("N\t");
+						spString = String.format("%.2f", shortestDistances[i][j]);
+					}
+					out.write(spString + "\t");
+					
+					if (i < outputMatrixSize && j < outputMatrixSize) {
+						System.out.print(spString + "\t");
 					}
 				}
 				out.write("\n");
+				if (i < outputMatrixSize) {
+					System.out.println();
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -78,7 +90,7 @@ public class TestAllPairsSP {
 		    }
 		}
 		
-		System.out.println(String.format("Total time: %d ms.\nFind results in %s", total, outfile));
+		
 	}
 
 }

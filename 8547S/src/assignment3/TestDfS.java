@@ -3,7 +3,6 @@
  */
 package assignment3;
 
-import java.io.File;
 import graphs.*;
 
 /**
@@ -20,14 +19,14 @@ public class TestDfS {
 	public static void main(String[] args) {
 		
 		String dgFileName = "mediumDG.txt";
-		File file = new File(INPUT_DATA_DIR + dgFileName);
-		Digraph digraph = new Digraph(new In(file));
-        
+		
 		long start = System.currentTimeMillis();
+		Digraph digraph = new Digraph(new In(INPUT_DATA_DIR + dgFileName));
+		long createDGTime = System.currentTimeMillis() - start;
+		start = System.currentTimeMillis();
 		DepthFirstOrder dfs = new DepthFirstOrder(digraph);
-        System.out.println(String.format("Composing DepthFirstOrder from %s. \nTime spent: %d", dgFileName, System.currentTimeMillis() - start));
-
-        System.out.println(dgFileName);
+		
+        System.out.println(String.format("Task #1 - Run DFS on %s. Time spent: \n\tCreating DG from %s - %d ms\n\tDFS - %d ms", dgFileName, dgFileName, createDGTime, System.currentTimeMillis() - start));
         
         System.out.print("Pre-order:  ");
         for (int v : dfs.pre()) {
