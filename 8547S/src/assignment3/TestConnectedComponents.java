@@ -1,9 +1,11 @@
 package assignment3;
 
+import java.util.Collection;
+import java.util.stream.StreamSupport;
+
 import graphs.CC;
 import graphs.Graph;
 import graphs.Queue;
-import graphs.StdIn;
 import graphs.StdOut;
 import graphs.SymbolGraph;
 
@@ -16,14 +18,11 @@ public class TestConnectedComponents {
         
         long start = System.currentTimeMillis();
         CC cc = new CC(G);
-
-        // number of connected components
         int componentsNumber = cc.count();
         long end = System.currentTimeMillis();
 
         System.out.println(componentsNumber + " components");
 
-        // compute list of vertices in each connected component
         Queue<Integer>[] components = (Queue<Integer>[]) new Queue[componentsNumber];
         for (int i = 0; i < componentsNumber; i++) {
             components[i] = new Queue<Integer>();
@@ -32,7 +31,7 @@ public class TestConnectedComponents {
             components[cc.id(v)].enqueue(v);
         }
 
-        // print results
+        // print connected components.
         for (int i = 0; i < componentsNumber; i++) {
             for (int v : components[i]) {
             	System.out.print(v + " ");
@@ -40,22 +39,29 @@ public class TestConnectedComponents {
             System.out.println();
         }
         
-        System.out.println(componentsNumber + " components in all.");
-        System.out.println(String.format("It took %d ms to use DFS identifying the components.", end-start));
+        System.out.println(String.format("Task #3 - It took %d ms to use DFS identifying the components and %d connected components identified in %s.", end-start, componentsNumber, dgFileName));
         
+        System.out.println("Task #4 - ");
         String[] actors = {"DiCaprio, Leonardo", "Roberts, Julia (I)", "Grant, Hugh (I)"};
         for (String actor:actors) {
         	if (sg.contains(actor)) {
-                int s = sg.index(actor);
-                System.out.println("Movies starred by " + actor);
+        		System.out.println("Movies starred by " + actor + ":");
+        		int s = sg.index(actor);                
                 for (int v : G.adj(s)) {
-                    StdOut.println("   " + sg.name(v));
+                	System.out.println("\t" + sg.name(v));
                 }
             }
             else {
-                StdOut.println("input does not contain '" + actor + "'\n");
+            	System.out.println("did not find movies starred by '" + actor + "'\n");
             }
         }
+        System.out.println("Movies starred by boty Roberts, Julia (I) and Grant, Hugh (I):");
+		int sRobertsJulia = sg.index("Roberts, Julia (I)");
+		int sGrantHugh = sg.index("Grant, Hugh (I)");
+        for (int v : G.adj(sRobertsJulia)) {
+        	if (StreamSupport.stream(G.adj(sGrantHugh).spliterator(), false).anyMatch(n -> n == v)) {
+        		System.out.println("\t" + sg.name(v));
+        	}        	
+        }
 	}
-
 }
