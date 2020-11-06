@@ -339,3 +339,4 @@ designerTemp/
 .vscode/
 __pycache__/
 /.metadata/
+output/
