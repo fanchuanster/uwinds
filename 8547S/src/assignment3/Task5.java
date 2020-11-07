@@ -70,6 +70,8 @@ public class Task5 {
 			sortedFiles[i] = OutputDir + sortedFiles[i];
 		}
 		
+		long start = System.currentTimeMillis();
+		
 		System.out.println("Partitioning '" + sourceDateFile + "' into following files:");
 		for (String f:sublists) {
 			System.out.println(f);
@@ -101,5 +103,7 @@ public class Task5 {
 		}
 		
 		multiWay(sortedFiles, sortedFile);
+		
+		System.out.println("Total CPU time is " + (System.currentTimeMillis()-start) + " ms");
 	}
 }
