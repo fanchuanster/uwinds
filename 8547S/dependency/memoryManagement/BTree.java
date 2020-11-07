@@ -18,23 +18,23 @@ package memoryManagement;
 public class BTree<Key extends Comparable<Key>, Value>  {
     private static final int M = 4;    // max children per B-tree node = M-1
 
-    private Node root;             // root of the B-tree
+    public Node root;             // root of the B-tree
     private int HT;                // height of the B-tree
     private int N;                 // number of key-value pairs in the B-tree
 
     // helper B-tree node data type
-    private static final class Node {
-        private int m;                             // number of children
-        private Entry[] children = new Entry[M];   // the array of children
+    public static final class Node {
+        public int m;                             // number of children
+        public Entry[] children = new Entry[M];   // the array of children
         private Node(int k) { m = k; }             // create a node with k children
     }
 
     // internal nodes: only use key and next
     // external nodes: only use key and value
-    private static class Entry {
-        private Comparable key;
+    public static class Entry {
+        public Comparable key;
         private Object value;
-        private Node next;     // helper field to iterate over array entries
+        public Node next;     // helper field to iterate over array entries
         public Entry(Comparable key, Object value, Node next) {
             this.key   = key;
             this.value = value;
