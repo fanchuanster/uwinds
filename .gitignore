@@ -340,3 +340,4 @@ designerTemp/
 __pycache__/
 /.metadata/
 output/
+.settings/
