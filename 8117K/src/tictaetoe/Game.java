@@ -42,6 +42,7 @@ public class Game implements Global {
 		System.out.println("Game Bot:Please enter name for escond player.");
 		String nameO = sc.nextLine();
 		System.out.println("You entered: " + nameO);
+		sc.close();
 		
 		switch (select) {
 		case 1:
