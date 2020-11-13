@@ -5,19 +5,13 @@ import aima.core.search.framework.qsearch.GraphSearch;
 import aima.core.search.framework.qsearch.TreeSearch;
 import aima.core.search.uninformed.BreadthFirstSearch;
 import aima.core.search.uninformed.DepthFirstSearch;
-import aima.core.search.uninformed.DepthLimitedSearch;
 import aima.core.search.uninformed.UniformCostSearch;
-import aima.core.agent.Action;
-import aima.core.search.framework.problem.GeneralProblem;
-import aima.core.search.framework.Node;
-import aima.core.search.framework.SearchForActions;
-import aima.core.util.datastructure.XYLocation;
 
-import java.util.ArrayList;
+import aima.core.search.framework.problem.GeneralProblem;
+import aima.core.search.framework.SearchForActions;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import java.util.function.Predicate;
 
@@ -82,5 +76,6 @@ public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCan
 		missionariesCannibalsBFS();
 		missionariesCannibalsDFS();
 		missionariesCannibalsUCS();
+		missionariesCannibalsUCS_NotCheckRepeatedStates();
 	}
 }
