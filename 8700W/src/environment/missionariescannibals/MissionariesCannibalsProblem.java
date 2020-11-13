@@ -2,9 +2,11 @@ package environment.missionariescannibals;
 
 import aima.core.search.framework.problem.Problem;
 import aima.core.search.framework.qsearch.GraphSearch;
+import aima.core.search.framework.qsearch.TreeSearch;
 import aima.core.search.uninformed.BreadthFirstSearch;
 import aima.core.search.uninformed.DepthFirstSearch;
 import aima.core.search.uninformed.DepthLimitedSearch;
+import aima.core.search.uninformed.UniformCostSearch;
 import aima.core.agent.Action;
 import aima.core.search.framework.problem.GeneralProblem;
 import aima.core.search.framework.Node;
@@ -33,7 +35,7 @@ public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCan
 	}
 	
 	private static void missionariesCannibalsBFS() {
-		System.out.println("\n--- MissionariesCannibalsProblem BFS ---");
+		System.out.println("\n--- BreadthFirstSearch ---");
 
 	    Problem<MissionariesCannibalsState, MissionariesCannibalsAction> problem = Functions.createMissionariesCannibalsProblem();
 	    SearchForActions<MissionariesCannibalsState, MissionariesCannibalsAction> search = new BreadthFirstSearch<>(new GraphSearch<>());
@@ -44,7 +46,7 @@ public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCan
 	    System.out.println("\n--- Done ---");
 	}
 	private static void missionariesCannibalsDFS() {
-		System.out.println("\n--- MissionariesCannibalsProblem DFS ---");
+		System.out.println("\n--- DepthFirstSearch ---");
 
 	    Problem<MissionariesCannibalsState, MissionariesCannibalsAction> problem = Functions.createMissionariesCannibalsProblem();
 	    SearchForActions<MissionariesCannibalsState, MissionariesCannibalsAction> search = new DepthFirstSearch<>(new GraphSearch<>());
@@ -54,11 +56,22 @@ public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCan
 	    System.out.println(search.getMetrics());
 	    System.out.println("\n--- Done ---");
 	}
-	private static void missionariesCannibalsDLS() {
-		System.out.println("\n--- MissionariesCannibalsProblem DLS ---");
+	private static void missionariesCannibalsUCS() {
+		System.out.println("\n--- UniformCostSearch ---");
 
 	    Problem<MissionariesCannibalsState, MissionariesCannibalsAction> problem = Functions.createMissionariesCannibalsProblem();
-	    DepthLimitedSearch<MissionariesCannibalsState, MissionariesCannibalsAction> search = new DepthLimitedSearch<MissionariesCannibalsState, MissionariesCannibalsAction>(5);
+	    UniformCostSearch<MissionariesCannibalsState, MissionariesCannibalsAction> search = new UniformCostSearch<>(new GraphSearch<>());
+	    Optional<List<MissionariesCannibalsAction>> actions = search.findActions(problem);
+
+	    actions.ifPresent(qActions -> qActions.forEach(System.out::println));
+	    System.out.println(search.getMetrics());
+	    System.out.println("\n--- Done ---");
+	}
+	private static void missionariesCannibalsUCS_NotCheckRepeatedStates() {
+		System.out.println("\n--- UniformCostSearch NotCheckRepeatedStates ---");
+
+	    Problem<MissionariesCannibalsState, MissionariesCannibalsAction> problem = Functions.createMissionariesCannibalsProblem();
+	    UniformCostSearch<MissionariesCannibalsState, MissionariesCannibalsAction> search = new UniformCostSearch<>(new TreeSearch<>());
 	    Optional<List<MissionariesCannibalsAction>> actions = search.findActions(problem);
 
 	    actions.ifPresent(qActions -> qActions.forEach(System.out::println));
@@ -68,6 +81,6 @@ public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCan
 	public static void main(String[] args) {
 		missionariesCannibalsBFS();
 		missionariesCannibalsDFS();
-		missionariesCannibalsDLS();
+		missionariesCannibalsUCS();
 	}
 }
