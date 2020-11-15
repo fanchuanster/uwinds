@@ -71,13 +71,17 @@ public class Task3 {
 		final String INPUT_PAGES_DIR = "resources\\W3C Web Pages\\Pages\\";
 		final String output = "output/";
 		
-		File directory = new File(INPUT_PAGES_DIR);
+		File directory = new File(output);
+	    if (! directory.exists()){
+	        directory.mkdir();
+	    }
+		
+		directory = new File(INPUT_PAGES_DIR);
 		File[] contents = directory.listFiles();
 		for ( File f : contents) {
 			String outputFile = output + f.getName().replaceAll(" ", "") + ".txt";
-			System.out.println("HTML converting " + f.getName() + " to " + outputFile);
+			System.out.println("HTML converting " + f.getName() + "\t==>\t" + outputFile);
 			HTMLtoText(f, outputFile);
-			break;
 		}
 	}
 }
