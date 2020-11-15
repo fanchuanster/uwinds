@@ -69,19 +69,19 @@ public class Task1 {
 
 		String fileString = readFile(sourceDataFile);
 		
-		System.out.println("Indices found by BoyerMoore:");
+		System.out.println("\nIndices found by BoyerMoore:");
 		for (String pat:patterns) {
 			int[] indices = searchPat(pat, fileString, 1);
 			System.out.println(pat + ": " + Arrays.toString(indices));
 		}
 		
-		System.out.println("Indices found by KMP:");
+		System.out.println("\nIndices found by KMP:");
 		for (String pat:patterns) {
 			int[] indices = searchPat(pat, fileString, 2);
 			System.out.println(pat + ": " + Arrays.toString(indices));
 		}
 		
-		System.out.println("Indices found by BruteForceMatch:");
+		System.out.println("\nIndices found by BruteForceMatch:");
 		for (String pat:patterns) {
 			int[] indices = searchPat(pat, fileString, 3);
 			System.out.println(pat + ": " + Arrays.toString(indices));
@@ -91,7 +91,7 @@ public class Task1 {
 		/*
 		 * performance test by running for times;
 		 */
-		System.out.println("Searching patterns for " + TIMES + " times with each algorithms, average CPU time:");
+		System.out.println("\nSearching patterns for " + TIMES + " times with each algorithms, average CPU time:");
 		long start = System.nanoTime();
 		for (int i=0; i<TIMES; i++) {
 			for (String pat:patterns) {
