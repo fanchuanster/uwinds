@@ -3,6 +3,7 @@ package assignment4;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.internal.StringUtil;
@@ -66,7 +67,7 @@ public class Task3 {
 			e.printStackTrace();
 		}
 	}
-	
+		
 	public static void main(String[] args) {
 		final String INPUT_PAGES_DIR = "resources\\W3C Web Pages\\Pages\\";
 		final String output = "output/";
