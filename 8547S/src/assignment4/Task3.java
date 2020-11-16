@@ -13,7 +13,10 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.NodeTraversor;
 import org.jsoup.select.NodeVisitor;
 
+
 public class Task3 {
+	public static final String INPUT_PAGES_DIR = "resources\\W3C Web Pages\\Pages\\";
+	public static final String output = "output/";
 	
     private static class ExtractTextNodeVisitor implements NodeVisitor {
         private StringBuilder nodeText = new StringBuilder(); // holds the text in the node.
@@ -69,8 +72,6 @@ public class Task3 {
 	}
 		
 	public static void main(String[] args) {
-		final String INPUT_PAGES_DIR = "resources\\W3C Web Pages\\Pages\\";
-		final String output = "output/";
 		
 		File directory = new File(output);
 	    if (! directory.exists()){

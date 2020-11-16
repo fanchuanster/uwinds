@@ -10,22 +10,7 @@ import java.util.stream.Collectors;
 
 import common.util;
 
-public class Task4 {
-    
-    static String[] findPattern(File file, Pattern pattern) {
-		
-	    Matcher matcher = pattern.matcher(util.readFile(file));
-	    // Check all occurrences
-	    ArrayList<String> emails = new ArrayList<String>();
-	    while (matcher.find()) {	        
-	        String key = matcher.group();
-	        emails.add(key);
-	    }
-	    String[] array = new String[emails.size()];
-	    emails.toArray(array);
-	    return array;
-	}
-    
+public class Task4 {    
 
 	public static void main(String[] args) {
 		final Pattern EMAIL_ADDRESS_PATTERN = 
@@ -41,15 +26,15 @@ public class Task4 {
 		ArrayList<String> emailsList = new ArrayList<String>();
 		ArrayList<String> phoneNumberList = new ArrayList<String>();
 		for ( File f : files) {
-			if (!f.isFile()) {
+			if (!f.isFile() || !f.getName().endsWith(".txt")) {
 				continue;
 			}
 			
-			String[] emails = findPattern(f, EMAIL_ADDRESS_PATTERN);
+			String[] emails = util.findPattern(f, EMAIL_ADDRESS_PATTERN);
 			for (String email:emails) {
 				emailsList.add(email);
 			}
-			String[] phoneNumbers = findPattern(f, PHONE_NUMBER_PATTERN);
+			String[] phoneNumbers = util.findPattern(f, PHONE_NUMBER_PATTERN);
 			for (String phoneNumber:phoneNumbers) {
 				phoneNumberList.add(phoneNumber);
 			}
@@ -57,8 +42,8 @@ public class Task4 {
 		
 		ArrayList<String> uniqueEmails = (ArrayList) emailsList.stream().distinct().collect(Collectors.toList());
 		ArrayList<String> uniquePhoneNumbers = (ArrayList) phoneNumberList.stream().distinct().collect(Collectors.toList());
-		System.out.println(String.format("Found %d emails, %d unique emails:\n%s", emailsList.size(), uniqueEmails.size(), uniqueEmails.toString()));
+		System.out.println(String.format("Found %d emails, out of them %d unique emails:\n%s", emailsList.size(), uniqueEmails.size(), uniqueEmails.toString()));
 		System.out.println();
-		System.out.println(String.format("Found %d phone numbers, %d unique phone numbers:\n%s", phoneNumberList.size(),uniquePhoneNumbers.size(), uniquePhoneNumbers.toString()));
+		System.out.println(String.format("Found %d phone numbers, out of them %d unique phone numbers:\n%s", phoneNumberList.size(),uniquePhoneNumbers.size(), uniquePhoneNumbers.toString()));
 	}
 }
