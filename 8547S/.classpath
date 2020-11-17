@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="dependency"/>
-	<classpathentry kind="lib" path="C:/Users/donwen.CORPDOM/WS/UWind/uwinds2/8547S/dependency/libs/jsoup-1.13.1.jar"/>
+	<classpathentry kind="lib" path="dependency/libs/jsoup-1.13.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
