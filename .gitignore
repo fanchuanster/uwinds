@@ -342,3 +342,4 @@ __pycache__/
 output/
 .settings/
 RemoteSystemsTempFiles
+.recommenders
