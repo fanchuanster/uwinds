@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/donwen.CORPDOM/WS/UWind/uwinds2/8700W/dependency/aima-core.jar"/>
+	<classpathentry kind="lib" path="dependency/aima-core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
