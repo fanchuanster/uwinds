@@ -40,8 +40,8 @@ public class Task4 {
 			}
 		}
 		
-		ArrayList<String> uniqueEmails = (ArrayList) emailsList.stream().distinct().collect(Collectors.toList());
-		ArrayList<String> uniquePhoneNumbers = (ArrayList) phoneNumberList.stream().distinct().collect(Collectors.toList());
+		ArrayList<String> uniqueEmails = (ArrayList<String>) emailsList.stream().distinct().collect(Collectors.toList());
+		ArrayList<String> uniquePhoneNumbers = (ArrayList<String>) phoneNumberList.stream().distinct().collect(Collectors.toList());
 		System.out.println(String.format("Found %d emails, out of them %d unique emails:\n%s", emailsList.size(), uniqueEmails.size(), uniqueEmails.toString()));
 		System.out.println();
 		System.out.println(String.format("Found %d phone numbers, out of them %d unique phone numbers:\n%s", phoneNumberList.size(),uniquePhoneNumbers.size(), uniquePhoneNumbers.toString()));
