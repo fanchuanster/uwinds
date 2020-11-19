@@ -28,20 +28,19 @@ public class AStarNonAdmissibleH {
 		for (int val = 1; val <= 8; val++) {
 			XYLocation locCurr = currState.getLocationOf(val);
 			XYLocation locGoal = GOAL_STATE.getLocationOf(val);
-			result += Math.sqrt(Math.abs(locGoal.getXCoOrdinate() + locCurr.getXCoOrdinate()));
+			result += Math.sqrt(Math.abs(locGoal.getX() + locCurr.getX()));
 			
-			result += Math.sqrt(Math.abs(locGoal.getXCoOrdinate() + locCurr.getXCoOrdinate()));
+			result += Math.sqrt(Math.abs(locGoal.getY() + locCurr.getY()));
 		}
 		return result;
 	}
 	
 	public static void main(String[] args) throws Exception {
-		EightPuzzleBoard board = new EightPuzzleBoard(new int[] { 7, 1, 8,
-				0, 4, 6, 2, 3, 5 });
+		EightPuzzleBoard board = new EightPuzzleBoard(new int[] { 7, 1, 8, 0, 4, 6, 2, 3, 5 });
 
 		Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(board);
 		AStarSearch<EightPuzzleBoard, Action> search = new AStarSearch<>(new GraphSearch<>(), AStarNonAdmissibleH::getHeuristicDistance);
-		SearchAgent<EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
+		SearchAgent<Object, EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
 		
 		Optional<List<Action>> actions = search.findActions(problem);
 		actions.ifPresent(qActions -> qActions.forEach(System.out::println));
