@@ -7,7 +7,7 @@ import aima.core.search.uninformed.BreadthFirstSearch;
 import aima.core.search.uninformed.DepthFirstSearch;
 import aima.core.search.uninformed.UniformCostSearch;
 
-import aima.core.search.framework.problem.GeneralProblem;
+import aima.core.search.framework.SearchAgent;
 import aima.core.search.framework.SearchForActions;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import java.util.function.Predicate;
 
-public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCannibalsState, MissionariesCannibalsAction> {
+public class MissionariesCannibalsProblem extends Problem {
 	
 	/*
 	 * number of missionaries, cannibals equals missionaries there is the same.
@@ -31,11 +31,13 @@ public class MissionariesCannibalsProblem extends GeneralProblem<MissionariesCan
 	private static void missionariesCannibalsBFS() {
 		System.out.println("\n--- BreadthFirstSearch ---");
 
-	    Problem<MissionariesCannibalsState, MissionariesCannibalsAction> problem = Functions.createMissionariesCannibalsProblem();
-	    SearchForActions<MissionariesCannibalsState, MissionariesCannibalsAction> search = new BreadthFirstSearch<>(new GraphSearch<>());
+	    MissionariesCannibalsProblem problem = Functions.createMissionariesCannibalsProblem();
+	    SearchForActions search = new BreadthFirstSearch(new GraphSearch());
+	    SearchAgent agent = new SearchAgent(problem, search);
 	    Optional<List<MissionariesCannibalsAction>> actions = search.findActions(problem);
 
 	    actions.ifPresent(qActions -> qActions.forEach(System.out::println));
+	    System.out.println("\n--- actions: ---" + search);
 	    System.out.println(search.getMetrics());
 	    System.out.println("\n--- Done ---");
 	}

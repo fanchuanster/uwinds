@@ -16,7 +16,7 @@ public class Functions {
         return state.equals(Functions.GOAL_STATE);
     }
 	
-	public static Problem<MissionariesCannibalsState, MissionariesCannibalsAction> createMissionariesCannibalsProblem() {
+	public static MissionariesCannibalsProblem createMissionariesCannibalsProblem() {
 		return new MissionariesCannibalsProblem(new MissionariesCannibalsState(new int[]{3,3,-1}));
 	}
 
