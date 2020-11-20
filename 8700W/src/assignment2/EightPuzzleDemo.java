@@ -1,7 +1,9 @@
 package assignment2;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import aima.core.agent.Action;
 import aima.core.environment.eightpuzzle.BidirectionalEightPuzzleProblem;
@@ -13,12 +15,29 @@ import aima.core.search.local.HillClimbingSearch;
 import aima.core.search.local.SimulatedAnnealingSearch;
 
 public class EightPuzzleDemo {
+	
+	static Set<EightPuzzleBoard> usedBoards = new HashSet<EightPuzzleBoard>();
+	
+	static EightPuzzleBoard getUniqueEightPuzzleState() {
+		EightPuzzleBoard board = null;
+		while (board == null) {
+//			board = new EightPuzzleBoard(Util.getRandomEightPuzzleState());
+			board = new EightPuzzleBoard(new int[] {1,0,2,3,4,5,6,7,8 });
+			if (usedBoards.contains(board)) {
+//				System.out.println("usedBoards size:" + usedBoards.size());
+				board = null;
+			} else {
+				usedBoards.add(board);
+			}			
+		}
+		return board;
+	}
 
 	private static void eightPuzzleSimulatedAnnealingDemo() {
 		System.out.println("\nEightPuzzleDemo Simulated Annealing Search");
 		for (int i=0; i<1000; i++) {
 			
-			EightPuzzleBoard initialState = new EightPuzzleBoard(Util.getRandomEightPuzzleState());
+			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
 			System.out.println("Initial State:\n" + initialState.toString());
 			try {
 				Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(initialState);
@@ -41,7 +60,7 @@ public class EightPuzzleDemo {
 		System.out.println("\nEightPuzzleDemo HillClimbingSearch");
 		for (int i=0; i<10000000; i++) {
 			
-			EightPuzzleBoard initialState = new EightPuzzleBoard(Util.getRandomEightPuzzleState());
+			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
 			System.out.println("Initial State:\n" + initialState.toString());
 			try {
 				Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(initialState);
@@ -60,7 +79,6 @@ public class EightPuzzleDemo {
 		}
 		System.out.println("\nEightPuzzleDemo done");
 	}
-	
 	
 	
 	private static void printInstrumentation(Properties properties) {
