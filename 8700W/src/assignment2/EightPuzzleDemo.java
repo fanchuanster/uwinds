@@ -22,9 +22,7 @@ public class EightPuzzleDemo {
 		EightPuzzleBoard board = null;
 		while (board == null) {
 			board = new EightPuzzleBoard(Util.getRandomEightPuzzleState());
-//			board = new EightPuzzleBoard(new int[] {1,0,2,3,4,5,6,7,8 });
 			if (usedBoards.contains(board)) {
-//				System.out.println("usedBoards size:" + usedBoards.size());
 				board = null;
 			} else {
 				usedBoards.add(board);
@@ -43,7 +41,6 @@ public class EightPuzzleDemo {
 				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
 				SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(new ManhattanHeuristicFunction());
 				SearchAgent agent = new SearchAgent(problem, search);
-//				printActions(agent.getActions());
 				System.out.println("Final State:\n" + search.getLastSearchState());
 				printInstrumentation(agent.getInstrumentation());
 
@@ -55,11 +52,12 @@ public class EightPuzzleDemo {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("\nEightPuzzleDemo Simulated Annealing Search done");
 	}
 	
 	private static void eightPuzzleHillClimbingSearchDemo() {
 		System.out.println("\nEightPuzzleDemo HillClimbingSearch");
-		for (int i=0; i<10000000; i++) {
+		for (int i=0; i<1000; i++) {
 			
 			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
 			System.out.println("Initial State:\n" + initialState.toString());
@@ -70,15 +68,15 @@ public class EightPuzzleDemo {
 				printActions(agent.getActions());
 				System.out.println("Final State:\n" + search.getLastSearchState());
 				printInstrumentation(agent.getInstrumentation());
-//				if (search.getLastSearchState().equals(EightPuzzleGoalTest)) {
-//					System.out.println("===============succeeded==============================:\n" + i);
-//					break;
-//				}
+				if (problem.isGoalState(search.getLastSearchState())) {
+					System.out.println("achieved in: " + i);
+					break;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("\nEightPuzzleDemo done");
+		System.out.println("\nEightPuzzleDemo ClimbingSearchDemo done");
 	}
 	
 	
@@ -91,8 +89,8 @@ public class EightPuzzleDemo {
 	}
 	
 	public static void main(String[] args) {
-		eightPuzzleSimulatedAnnealingDemo();
-//		eightPuzzleHillClimbingSearchDemo();
+//		eightPuzzleSimulatedAnnealingDemo();
+		eightPuzzleHillClimbingSearchDemo();
 	}
 
 }
