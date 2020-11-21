@@ -79,6 +79,31 @@ public class EightPuzzleDemo {
 		System.out.println("\nEightPuzzleDemo ClimbingSearchDemo done");
 	}
 	
+	private static void eightPuzzleHillClimbingFirstChoiceDemo() {
+		System.out.println("\nEightPuzzleDemo HillClimbingSearchFirstChoice");
+		for (int i=0; i<1000; i++) {
+			
+			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
+			System.out.println("Initial State:\n" + initialState.toString());
+			try {
+				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
+				HillClimbingSearch search = new HillClimbingSearchFirstChoice(new ManhattanHeuristicFunction());
+				SearchAgent agent = new SearchAgent(problem, search);
+				printActions(agent.getActions());
+				System.out.println("Final State:\n" + search.getLastSearchState());
+				
+				if (problem.isGoalState(search.getLastSearchState())) {
+					printInstrumentation(agent.getInstrumentation());
+					System.out.println("achieved in: " + i);
+					break;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("\nEightPuzzleDemo HillClimbingSearchFirstChoice done");
+	}
+	
 	
 	private static void printInstrumentation(Properties properties) {
 		properties.keySet().stream().map(key -> key + "=" + properties.get(key)).forEach(System.out::println);
@@ -90,7 +115,8 @@ public class EightPuzzleDemo {
 	
 	public static void main(String[] args) {
 //		eightPuzzleSimulatedAnnealingDemo();
-		eightPuzzleHillClimbingSearchDemo();
+//		eightPuzzleHillClimbingSearchDemo();
+		eightPuzzleHillClimbingFirstChoiceDemo();
 	}
 
 }
