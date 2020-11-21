@@ -17,6 +17,7 @@ import aima.core.search.local.SimulatedAnnealingSearch;
 public class EightPuzzleDemo {
 	
 	static Set<EightPuzzleBoard> usedBoards = new HashSet<EightPuzzleBoard>();
+	final static int timesMax = 1000;
 	
 	static EightPuzzleBoard getUniqueEightPuzzleState() {
 		EightPuzzleBoard board = null;
@@ -31,77 +32,87 @@ public class EightPuzzleDemo {
 		return board;
 	}
 
-	private static void eightPuzzleSimulatedAnnealingDemo() {
+	private static int eightPuzzleSimulatedAnnealingDemo() {
 		System.out.println("\nEightPuzzleDemo Simulated Annealing Search");
-		for (int i=0; i<1000; i++) {
+		int succeeded = 0;
+		usedBoards.clear();
+		for (int i=0; i<timesMax; i++) {
 			
 			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
-			System.out.println("Initial State:\n" + initialState.toString());
+//			System.out.println("Initial State:\n" + initialState.toString());
 			try {
 				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
 				SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(new ManhattanHeuristicFunction());
 				SearchAgent agent = new SearchAgent(problem, search);
-				System.out.println("Final State:\n" + search.getLastSearchState());
-				printInstrumentation(agent.getInstrumentation());
-
+				
 				if (problem.isGoalState(search.getLastSearchState())) {
 					System.out.println("achieved in: " + i);
-					break;
+					System.out.println("Final State:\n" + search.getLastSearchState());
+					printInstrumentation(agent.getInstrumentation());
+					succeeded += 1;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		System.out.println("\nEightPuzzleDemo Simulated Annealing Search done");
+		return succeeded;
 	}
 	
-	private static void eightPuzzleHillClimbingSearchDemo() {
+	private static int eightPuzzleHillClimbingSearchDemo() {
 		System.out.println("\nEightPuzzleDemo HillClimbingSearch");
-		for (int i=0; i<1000; i++) {
+		int succeeded = 0;
+		usedBoards.clear();
+		for (int i=0; i<timesMax; i++) {
 			
 			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
-			System.out.println("Initial State:\n" + initialState.toString());
+//			System.out.println("Initial State:\n" + initialState.toString());
 			try {
 				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
 				HillClimbingSearch search = new HillClimbingSearch(new ManhattanHeuristicFunction());
 				SearchAgent agent = new SearchAgent(problem, search);
-				printActions(agent.getActions());
-				System.out.println("Final State:\n" + search.getLastSearchState());
-				printInstrumentation(agent.getInstrumentation());
+//				printActions(agent.getActions());
+				
 				if (problem.isGoalState(search.getLastSearchState())) {
 					System.out.println("achieved in: " + i);
-					break;
+					System.out.println("Final State:\n" + search.getLastSearchState());
+					printInstrumentation(agent.getInstrumentation());
+					succeeded += 1;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		System.out.println("\nEightPuzzleDemo ClimbingSearchDemo done");
+		return succeeded;
 	}
 	
-	private static void eightPuzzleHillClimbingFirstChoiceDemo() {
+	private static int eightPuzzleHillClimbingFirstChoiceDemo() {
 		System.out.println("\nEightPuzzleDemo HillClimbingSearchFirstChoice");
-		for (int i=0; i<1000; i++) {
+		int succeeded = 0;
+		usedBoards.clear();
+		for (int i=0; i<timesMax; i++) {
 			
 			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
-			System.out.println("Initial State:\n" + initialState.toString());
+//			System.out.println("Initial State:\n" + initialState.toString());
 			try {
 				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
 				HillClimbingSearch search = new HillClimbingSearchFirstChoice(new ManhattanHeuristicFunction());
 				SearchAgent agent = new SearchAgent(problem, search);
-				printActions(agent.getActions());
-				System.out.println("Final State:\n" + search.getLastSearchState());
+//				printActions(agent.getActions());
 				
 				if (problem.isGoalState(search.getLastSearchState())) {
+					System.out.println("Final State:\n" + search.getLastSearchState());
 					printInstrumentation(agent.getInstrumentation());
 					System.out.println("achieved in: " + i);
-					break;
+					succeeded += 1;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		System.out.println("\nEightPuzzleDemo HillClimbingSearchFirstChoice done");
+		return succeeded;
 	}
 	
 	
@@ -114,9 +125,13 @@ public class EightPuzzleDemo {
 	}
 	
 	public static void main(String[] args) {
-//		eightPuzzleSimulatedAnnealingDemo();
-//		eightPuzzleHillClimbingSearchDemo();
-		eightPuzzleHillClimbingFirstChoiceDemo();
+		int succes = eightPuzzleHillClimbingSearchDemo();
+		int successFC = eightPuzzleHillClimbingFirstChoiceDemo();
+		int successSA= eightPuzzleSimulatedAnnealingDemo();
+		System.out.println("\nSuccess out of " + timesMax + " tries:");
+		System.out.println(String.format("HillClimbingSearch: %d", succes));
+		System.out.println(String.format("HillClimbing First choice: %d", successFC));
+		System.out.println(String.format("SimulatedAnnealing: %d", successSA));
 	}
 
 }

@@ -67,6 +67,15 @@ public class HillClimbingSearchFirstChoice extends HillClimbingSearch {
 	public Object getLastSearchState() {
 		return lastState;
 	}
+	@Override
+	public NodeExpander getNodeExpander() {
+		return nodeExpander;
+	}
+	@Override
+	public Metrics getMetrics() {
+		metrics.set(METRIC_NODES_EXPANDED, nodeExpander.getNumOfExpandCalls());
+		return metrics;
+	}
 	
 	//
 	// PRIVATE METHODS
