@@ -10,7 +10,11 @@ import aima.core.environment.eightpuzzle.BidirectionalEightPuzzleProblem;
 import aima.core.environment.eightpuzzle.EightPuzzleBoard;
 import aima.core.environment.eightpuzzle.ManhattanHeuristicFunction;
 import aima.core.search.framework.SearchAgent;
+import aima.core.search.framework.SearchForActions;
+import aima.core.search.framework.SearchForStates;
 import aima.core.search.framework.problem.Problem;
+import aima.core.search.framework.qsearch.GraphSearch;
+import aima.core.search.informed.AStarSearch;
 import aima.core.search.local.HillClimbingSearch;
 import aima.core.search.local.SimulatedAnnealingSearch;
 
@@ -71,7 +75,7 @@ public class EightPuzzleDemo {
 				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
 				HillClimbingSearch search = new HillClimbingSearch(new ManhattanHeuristicFunction());
 				SearchAgent agent = new SearchAgent(problem, search);
-//				printActions(agent.getActions());
+				printActions(agent.getActions());
 				
 				if (problem.isGoalState(search.getLastSearchState())) {
 					System.out.println("achieved in: " + i);
@@ -87,31 +91,29 @@ public class EightPuzzleDemo {
 		return succeeded;
 	}
 	
-	private static int eightPuzzleHillClimbingFirstChoiceDemo() {
-		System.out.println("\nEightPuzzleDemo HillClimbingSearchFirstChoice");
-		int succeeded = 0;
+	private static int testEightPuzzle(SearchForActions search, int times) {
+		System.out.println("\ntestEightPuzzle search with " + search.toString());
 		usedBoards.clear();
-		for (int i=0; i<timesMax; i++) {
+		
+		int succeeded = 0;
+		for (int i=0; i<times; i++) {
 			
 			EightPuzzleBoard initialState = getUniqueEightPuzzleState();
-//			System.out.println("Initial State:\n" + initialState.toString());
 			try {
 				Problem problem = new BidirectionalEightPuzzleProblem(initialState);
-				HillClimbingSearch search = new HillClimbingSearchFirstChoice(new ManhattanHeuristicFunction());
 				SearchAgent agent = new SearchAgent(problem, search);
-//				printActions(agent.getActions());
 				
-				if (problem.isGoalState(search.getLastSearchState())) {
-					System.out.println("Final State:\n" + search.getLastSearchState());
+				if (problem.isGoalState(((SearchForStates)search).findState(problem))) {
+					search.getMetrics();
+					System.out.println("Path cost="+agent.getActions().size());
 					printInstrumentation(agent.getInstrumentation());
-					System.out.println("achieved in: " + i);
 					succeeded += 1;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("\nEightPuzzleDemo HillClimbingSearchFirstChoice done");
+		System.out.println(String.format("Success rate: %d/%d", succeeded, times));
 		return succeeded;
 	}
 	
@@ -125,13 +127,13 @@ public class EightPuzzleDemo {
 	}
 	
 	public static void main(String[] args) {
-		int succes = eightPuzzleHillClimbingSearchDemo();
-		int successFC = eightPuzzleHillClimbingFirstChoiceDemo();
-		int successSA= eightPuzzleSimulatedAnnealingDemo();
-		System.out.println("\nSuccess out of " + timesMax + " tries:");
-		System.out.println(String.format("HillClimbingSearch: %d", succes));
-		System.out.println(String.format("HillClimbing First choice: %d", successFC));
-		System.out.println(String.format("SimulatedAnnealing: %d", successSA));
+		final int times = 1000;
+		ManhattanHeuristicFunction hf = new ManhattanHeuristicFunction();
+		testEightPuzzle(new HillClimbingSearch(hf), times);
+		testEightPuzzle(new HillClimbingSearchFirstChoice(hf), times);
+		testEightPuzzle(new SimulatedAnnealingSearch(hf), times);
+		testEightPuzzle(new SimulatedAnnealingSearch(hf), times);
+		testEightPuzzle(new AStarSearch(new GraphSearch(), hf), 1);
 	}
 
 }
