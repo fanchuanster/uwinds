@@ -56,6 +56,10 @@ def autocomplete():
 	app.logger.info(str(x.content))
 	app.logger.info('autocomplete - done')
 	return x.json()
+
+@app.route('/hello')
+def hello_world():
+    return 'Hello, World!'
    
 # @app.route('/', defaults={'path': ''})
 # @app.route('/<path:path>')
