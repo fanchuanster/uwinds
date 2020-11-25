@@ -15,9 +15,10 @@
     </div>
     <div class="row">
       <ul>
-        <li *ngFor="let i of res">{{i.description}}</li>
+        <li *ngFor="let i of predictions">{{i.description}} - {{i.place_id}}</li>
       </ul>
     </div>
+    <div>Time Zone: {{timezone}}</div>
     <div>Time: {{ time | async }}</div>
   </div>
 </div>
