@@ -25,6 +25,9 @@ export class HomeComponent {
 
   predictions;
 
+  timeOut;
+  timeOutDuration = 500;
+
   getTimeZoneInfo(loc) {
     // https://maps.googleapis.com/maps/api/timezone/json?location=31.230416,121.473701&timestamp=1331161200&key=AIzaSyARJnJeSRuwWaW9Y4LMBnV8MqwaybrRKq0
     this.apiService.get('/timezone/json?location='+ encodeURI(loc.lat+","+loc.lng) + '&timestamp=1331161200&key='+this.key+'&sessiontoken='+this.sessiontoken)
@@ -51,14 +54,19 @@ export class HomeComponent {
   }
 
   onSearchChange(searchValue: string): void {  
-    console.log('get ' + searchValue);
-    this.apiService.get('/place/autocomplete/json?input='+ encodeURI(searchValue) + '&key='+this.key+'&sessiontoken='+this.sessiontoken)
-    .subscribe(
-      data => {
-        this.predictions = data.predictions;
-        this.getPlaceInfo(this.predictions);
-        return data;
-      });
+    clearTimeout(this.timeOut);
+    this.timeOut = setTimeout(() => {
+      console.log('get ' + searchValue);
+      this.apiService.get('/place/autocomplete/json?input='+ encodeURI(searchValue) + '&key='+this.key+'&sessiontoken='+this.sessiontoken)
+      .subscribe(
+        data => {
+          this.predictions = data.predictions;
+          this.getPlaceInfo(this.predictions);
+          return data;
+        });
+    }, this.timeOutDuration);
+
+    
   }
   time = new Observable<string>(observer => {
     setInterval(() => observer.next(new Date().toString()), 1000);
