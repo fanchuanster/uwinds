@@ -15,11 +15,8 @@
     </div>
     <div class="row">
       <ul>
-        <li *ngFor="let i of auto_list">{{i.description}}</li>
+        <li *ngFor="let i of res">{{i.description}}</li>
       </ul>
-      <div>
-        {{res}}
-      </div>
     </div>
     <div>Time: {{ time | async }}</div>
   </div>

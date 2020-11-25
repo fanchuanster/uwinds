@@ -19,7 +19,7 @@ export class HomeComponent {
     private apiService: ApiService,
   ) {}
 
-  res: string; 
+  res; 
 
   auto_list: City[];
   get(input) {
@@ -27,7 +27,7 @@ export class HomeComponent {
     this.apiService.get('/place/autocomplete/json?input='+ encodeURI(input) + '&key=AIzaSyARJnJeSRuwWaW9Y4LMBnV8MqwaybrRKq0&sessiontoken=1234567890')
     .subscribe(
       data => {
-        this.res = data['your path'];
+        this.res = data.predictions;
         console.log(data);
         return data;
       });

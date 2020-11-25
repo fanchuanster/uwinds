@@ -20,8 +20,8 @@ def autocomplete():
 	redirect_url = google_api + autocomplete_path + "?input=%s&key=%s&sessiontoken=%s" % (input, key, sessiontoken)
 	x = requests.get(redirect_url)
 
-	app.logger.info(x)
-	return '{"input":"%s", "key":"%s", "sessiontoken":"%s"}' % (input, key, sessiontoken)
+	app.logger.info(x.json())
+	return x.json()
    
 # @app.route('/', defaults={'path': ''})
 # @app.route('/<path:path>')
