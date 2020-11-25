@@ -18,8 +18,8 @@ timezone_path = '/maps/api/timezone/json'
 
 @app.route(timezone_path)
 def timezone():
-	app.logger.info('timezone')
 	location = request.args.get('location')
+	app.logger.info('get timezone for location {} ..'.format(location))
 	timestamp = request.args.get('timestamp')
 	key = request.args.get('key')
 	sessiontoken = request.args.get('sessiontoken')
@@ -27,31 +27,34 @@ def timezone():
 	x = requests.get(redirect_url)
 
 	app.logger.info(x.json())
+	app.logger.info('get timezone for location done')
 	return x.json()
 
 @app.route(placedetails_path)
 def placedetails():
-	app.logger.info('placedetails')
 	place_id = request.args.get('place_id')
+	app.logger.info('get placedetails for place_id "%s"' % place_id)
 	fields = request.args.get('fields')
 	key = request.args.get('key')
 	sessiontoken = request.args.get('sessiontoken')
 	redirect_url = google_api + placedetails_path + "?place_id=%s&fields=%s&key=%s&sessiontoken=%s" % (place_id, fields, key, sessiontoken)
 	x = requests.get(redirect_url)
 
-	# app.logger.info(x.json())
+	app.logger.info(x.json())
+	app.logger.info('get placedetails done')
 	return x.json()['result']
 
 @app.route(autocomplete_path)
 def autocomplete():
-	app.logger.info('autocomplete')
 	input = request.args.get('input')
+	app.logger.info('autocomplete - getting predictions for city input "%s"..' % input)
+	
 	key = request.args.get('key')
 	sessiontoken = request.args.get('sessiontoken')
 	redirect_url = google_api + autocomplete_path + "?input=%s&key=%s&sessiontoken=%s" % (input, key, sessiontoken)
 	x = requests.get(redirect_url)
-
-	# app.logger.info(x.json())
+	app.logger.info(str(x.content))
+	app.logger.info('autocomplete - done')
 	return x.json()
    
 # @app.route('/', defaults={'path': ''})
