@@ -2,23 +2,35 @@
 
   <div class="banner" *appShowAuthed="false">
     <div class="container">
-      <h1 class="logo-font">api demo</h1>
-      <p>A place to share your <i>Angular</i> knowledge.</p>
+      <h1 class="logo-font">API demo - Time zone checker</h1>
     </div>
   </div>
 
   <div class="container page">
     <div class="row">
-      <label>input your city:
-        <input #city class="form-control" (input)="onSearchChange($event.target.value)" />
+      <label>Usages:
+        <ul>
+          <li>input a city name you would like to check timezone</li>
+          <li>*in the backend, it will call Google APIs to get the city location</li>
+          <li>*then get the time zone with the city location</li>
+        </ul>
       </label>
     </div>
     <div class="row">
+      <label>Input city name:
+        <input class="form-control" (input)="onSearchChange($event.target.value)" />
+      </label>
+      <label>Time Zone:
+        <div>{{timezone}}</div>
+      </label>
+    </div>
+    
+    <div class="row">
       <ul>
-        <li *ngFor="let i of predictions">{{i.description}} - {{i.place_id}}</li>
+        <li *ngFor="let i of predictions">{{i.description}}</li>
       </ul>
     </div>
-    <div>Time Zone: {{timezone}}</div>
-    <div>Time: {{ time | async }}</div>
+    
+    <!-- <div>Time: {{ time | async }}</div> -->
   </div>
 </div>
