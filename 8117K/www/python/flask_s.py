@@ -1,8 +1,10 @@
 from flask import Flask
+from flask import jsonify
 from flask_cors import CORS
 from flask import request
 import requests
 import logging
+from movie_recommender import MovieRecommender
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename="apidemo.log")
 
@@ -67,6 +69,16 @@ def hello_world():
 # @app.route('/<path:path>')
 # def catch_all(path):
     # return '{"your path":"You want path %s"}' % path
+
+@app.route("/recommend/<string:movie_title>")
+def recommend(movie_title):
+    mr = MovieRecommender()
+    recommendations = mr.recommend_by_overview(movie_title)
+    # return recommendations
+    if not recommendations:
+        return "no recommendations for %s" % movie_title
+    # return jsonify([ { "title":r[0], "score":r[1] } for r in recommendations ])
+    return jsonify([ r[0] for r in recommendations ])
 
 def main():
 	app.run(host= '169.48.25.194')
