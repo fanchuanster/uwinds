@@ -69,4 +69,5 @@ def hello_world():
     # return '{"your path":"You want path %s"}' % path
 
 if __name__ == '__main__':
-   app.run()
+	app.run(host= '0.0.0.0')
+	# app.run()
