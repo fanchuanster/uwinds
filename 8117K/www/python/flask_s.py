@@ -1,11 +1,13 @@
 from flask import Flask
+from flask_cors import CORS
 from flask import request
 import requests
 import logging
 
-app = Flask(__name__)
-
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename="apidemo.log")
+
+app = Flask(__name__)
+CORS(app)
 
 app.logger.setLevel(logging.INFO)
 app.logger.info("some text")
