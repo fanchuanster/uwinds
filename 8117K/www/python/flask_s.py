@@ -68,6 +68,8 @@ def hello_world():
 # def catch_all(path):
     # return '{"your path":"You want path %s"}' % path
 
-if __name__ == '__main__':
+def main():
 	app.run(host= '169.48.25.194')
-	# app.run()
+
+if __name__ == '__main__':
+	main()
