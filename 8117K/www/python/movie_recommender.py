@@ -24,6 +24,8 @@ class MovieRecommender:
         if os.path.exists(movie_datafile):
             self.metadata_df = pd.read_csv(movie_datafile, low_memory=False)
             self.top5000_movies = self.get_top_movies_by_score()
+        else:
+            print("data file does not exists")
 
     def get_top_movies_by_score(self, quantile=0.9):
         C = self.metadata_df['vote_average'].mean()

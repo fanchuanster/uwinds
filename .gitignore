@@ -390,3 +390,4 @@ yarn-error.log
 Thumbs.db
 #dist/
 *.log
+archive/
