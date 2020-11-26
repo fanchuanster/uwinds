@@ -7,7 +7,6 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename="apidemo.log")
 
 app = Flask(__name__)
-CORS(app)
 
 app.logger.setLevel(logging.INFO)
 app.logger.info("some text")
@@ -69,6 +68,7 @@ def hello_world():
     # return '{"your path":"You want path %s"}' % path
 
 def main():
+	CORS(app)
 	app.run(host= '169.48.25.194')
 
 if __name__ == '__main__':
