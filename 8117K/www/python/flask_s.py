@@ -19,6 +19,7 @@ timezone_path = '/maps/api/timezone/json'
 
 @app.route(timezone_path)
 def timezone():
+	CORS(app)
 	location = request.args.get('location')
 	app.logger.info('get timezone for location {} ..'.format(location))
 	timestamp = request.args.get('timestamp')
@@ -33,6 +34,7 @@ def timezone():
 
 @app.route(placedetails_path)
 def placedetails():
+	CORS(app)
 	place_id = request.args.get('place_id')
 	app.logger.info('get placedetails for place_id "%s"' % place_id)
 	fields = request.args.get('fields')
