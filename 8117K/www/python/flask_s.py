@@ -47,6 +47,7 @@ def placedetails():
 
 @app.route(autocomplete_path)
 def autocomplete():
+	CORS(app)
 	input = request.args.get('input')
 	app.logger.info('autocomplete - getting predictions for city input "%s"..' % input)
 	
