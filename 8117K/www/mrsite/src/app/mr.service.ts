@@ -11,9 +11,10 @@ export class MrService {
 
   constructor(private http: HttpClient) { }
 
-  private heroesUrl = '${environment.api_url}/recommend/';
+  private heroesUrl = environment.api_url + '/recommend/';
     
   getRecommendations(title: string): Observable<string[]> {
+    console.log(this.heroesUrl)
     return this.http.get<string[]>(this.heroesUrl + encodeURI(title));
   }
 }

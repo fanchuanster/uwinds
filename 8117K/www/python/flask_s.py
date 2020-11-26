@@ -78,7 +78,7 @@ def recommend(movie_title):
 	mr = MovieRecommender()
 	recommendations = mr.recommend_by_overview(movie_title)
 	if not recommendations:
-		return "no recommendations for %s" % movie_title
+		return jsonify([{"title":"None", "score":0}])
 	return jsonify([ { "title":r[0], "score":r[1] } for r in recommendations ])
 	# return jsonify([ r[0] for r in recommendations ])
 
