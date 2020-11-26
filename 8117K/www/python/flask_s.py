@@ -7,9 +7,10 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename="apidemo.log")
 
 app = Flask(__name__)
+CORS(app)
 
 app.logger.setLevel(logging.INFO)
-app.logger.info("some text")
+app.logger.info("start..")
 
 google_api = 'https://maps.googleapis.com'
 
@@ -19,7 +20,6 @@ timezone_path = '/maps/api/timezone/json'
 
 @app.route(timezone_path)
 def timezone():
-	CORS(app)
 	location = request.args.get('location')
 	app.logger.info('get timezone for location {} ..'.format(location))
 	timestamp = request.args.get('timestamp')
@@ -34,7 +34,6 @@ def timezone():
 
 @app.route(placedetails_path)
 def placedetails():
-	CORS(app)
 	place_id = request.args.get('place_id')
 	app.logger.info('get placedetails for place_id "%s"' % place_id)
 	fields = request.args.get('fields')
@@ -49,7 +48,6 @@ def placedetails():
 
 @app.route(autocomplete_path)
 def autocomplete():
-	CORS(app)
 	input = request.args.get('input')
 	app.logger.info('autocomplete - getting predictions for city input "%s"..' % input)
 	
@@ -71,7 +69,6 @@ def hello_world():
     # return '{"your path":"You want path %s"}' % path
 
 def main():
-	CORS(app)
 	app.run(host= '169.48.25.194')
 
 if __name__ == '__main__':
