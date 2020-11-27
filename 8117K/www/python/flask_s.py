@@ -80,11 +80,10 @@ def recommend(movie_title):
 	if not recommendations:
 		return jsonify([{"title":"None", "score":0}])
 	return jsonify([ { "title":r[0], "score":r[1] } for r in recommendations ])
-	# return jsonify([ r[0] for r in recommendations ])
 
 def main():
+	# app.run(host= '0.0.0.0')
 	app.run(host= '169.48.25.194')
-	# app.run()
 
 if __name__ == '__main__':
 	main()
