@@ -1,0 +1,91 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<settings>
+	<interactiveMode>false</interactiveMode>
+	<mirrors>
+		<!--<mirror>
+			<id>nexus</id>
+			<mirrorOf>external:*,!plugins,!alm,!alm-releases,!alm-snapshots,!alm-latest,!alm-nightly,!alm-extensions,!sso-snapshots,!agm-latest,!alm-staging,!alm-drops</mirrorOf>
+			<url>http://nexus.almoctane.com:8081/content/groups/alm/</url>
+		</mirror>-->
+	</mirrors>
+	
+	<profiles>  
+		<profile>
+			<id>default-settings</id>
+			<properties>
+				<maven.dev.monitoring.enableMonitoring>false</maven.dev.monitoring.enableMonitoring>
+			</properties>			
+			<repositories>
+				<repository>
+					<id>alm</id>
+					<url>http://nexus.almoctane.com:8081/content/groups/alm-public</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+					<releases>
+						<updatePolicy>always</updatePolicy>
+					</releases>					
+				</repository>
+				<repository>
+					<id>saas</id>
+					<url>http://nexus.saas.hpeswlab.net:8081/nexus/content/groups/saas-rnd-public</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+					<releases>
+						<updatePolicy>always</updatePolicy>
+					</releases>					
+				</repository>
+			</repositories>
+			
+			<pluginRepositories>
+				<pluginRepository>
+					<id>alm</id>
+					<url>http://nexus.almoctane.com:8081/content/groups/alm-public</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>sass</id>
+					<url>http://nexus.saas.hpeswlab.net:8081/nexus/content/groups/saas-rnd-public</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>			
+			
+		</profile>		
+	</profiles>
+	
+	<activeProfiles>
+		<activeProfile>default-settings</activeProfile>
+	</activeProfiles>
+	
+	<pluginGroups>
+		<pluginGroup>com.atlassian.maven.plugins</pluginGroup>
+		<pluginGroup>org.mortbay.jetty</pluginGroup>
+		<pluginGroup>org.jenkins-ci.tools</pluginGroup>
+	</pluginGroups>
+
+</settings>
