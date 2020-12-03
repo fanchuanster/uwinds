@@ -65,6 +65,9 @@ def autocomplete():
 @app.route('/hello')
 def hello_world():
     return 'Hello, World!'
+@app.route('/')
+def hello_world2():
+    return 'Hello, World!'
    
 # @app.route('/', defaults={'path': ''})
 # @app.route('/<path:path>')
@@ -72,17 +75,18 @@ def hello_world():
     # return '{"your path":"You want path %s"}' % path
  
  
- mr = None
- def get_mr():
+mr = None
+def get_mr():
     global mr
     if not mr:
         mr = MovieRecommender()
     return mr
  
-@app.route("/recommend/movie_titles")
-def get_movie_titles():
+@app.route("/recommend/movie_titles/<string:search>")
+def get_movie_titles(search):
     mr = get_mr()
-    return mr.get_movie_titles()
+    app.logger.info(search)
+    return jsonify([str(t) for t in mr.get_movie_titles() if str(t).lower().startswith(search.lower())][:100])
 
 @app.route("/recommend/<string:movie_title>")
 def recommend(movie_title):
@@ -93,9 +97,19 @@ def recommend(movie_title):
 	if not recommendations:
 		return jsonify([{"title":"None", "score":0}])
 	return jsonify([ { "title":r[0], "score":r[1] } for r in recommendations ])
+    
+@app.route("/recommend2/<string:movie_title>")
+def recommend2(movie_title):
+	app.logger.info("recommending for %s - %s" % (movie_title, unquote(movie_title)))
+	movie_title = unquote(movie_title)
+	mr = get_mr()
+	recommendations = mr.recommend_by_overview(movie_title)
+	if not recommendations:
+		return jsonify([{"title":"None", "score":0}])
+	return jsonify([ { "title":r[0], "score":r[1] } for r in recommendations ])
 
 def main():
-	# app.run(host= '0.0.0.0')
+	# app.run(host= 'localhost')
 	app.run(host= '169.48.25.194')
 
 if __name__ == '__main__':
